@@ -1,520 +1,540 @@
 // ============================================================
 // KSB "Echt oder KI?" – Quiz-Datenbank
-// Bilder: Unsplash (echte Fotos) + generierte Platzhalter-URLs
 // ============================================================
 
+// --- BILDER-QUIZ ---
 const IMAGE_QUIZ_DATA = [
-  // --- ECHTE BILDER (Unsplash – frei nutzbar) ---
+  // ===== ECHTE FOTOS (Unsplash) =====
   {
-    id: "real_01",
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-    type: "real",
-    category: "Landschaft",
-    difficulty: 1,
-    explanation: "Dieses Foto zeigt natürliche Unregelmässigkeiten in den Wolken und authentische Lichtreflexionen auf den Bergen, die KI oft nicht perfekt nachbilden kann.",
-    tips: ["Achte auf natürliche Wolkenformationen", "Echte Fotos haben oft kleine Unregelmässigkeiten im Hintergrund"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=900&q=80',
+    explanation: 'Dieses Bild ist ein echtes Foto. Beachte die natürliche Unregelmässigkeit in der Landschaft, authentische Wettereffekte und die konsistente Beleuchtung – typische Merkmale eines echten Fotos.',
+    category: 'Landschaft',
+    difficulty: 1
   },
   {
-    id: "real_02",
-    src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80",
-    type: "real",
-    category: "Architektur",
-    difficulty: 1,
-    explanation: "Eine echte Stadtansicht mit konsistenter Architektur von New York. Natürliche Lichtverhältnisse und korrekte Perspektivlinien.",
-    tips: ["Gebäudefenster sollten ein gleichmässiges Muster haben", "KI verdoppelt manchmal Gebäude oder erzeugt unmögliche Strukturen"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=80',
+    explanation: 'Dieses Porträt ist echt. Echte Gesichter zeigen natürliche Asymmetrie, kleine Hautunregelmässigkeiten und authentische Reflexionen in den Augen.',
+    category: 'Porträt',
+    difficulty: 2
   },
   {
-    id: "real_03",
-    src: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&q=80",
-    type: "real",
-    category: "Tiere",
-    difficulty: 1,
-    explanation: "Ein echtes Foto eines Hundes mit natürlichem Fell, korrekten Proportionen und einer authentischen Umgebung.",
-    tips: ["Fell und Haare sind bei KI oft zu gleichmässig", "Achte auf die Pfoten – KI hat Mühe mit Details"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=900&q=80',
+    explanation: 'Dieses Katzenfoto ist echt. Achte auf die natürliche Fellstruktur, die realistischen Schnurrhaare und die natürlichen Lichtreflexe in den Augen.',
+    category: 'Tiere',
+    difficulty: 1
   },
   {
-    id: "real_04",
-    src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
-    type: "real",
-    category: "Alltag",
-    difficulty: 2,
-    explanation: "Ein echtes Food-Foto mit natürlichen Texturen, realistischem Geschirr und authentischer Beleuchtung.",
-    tips: ["Essen hat in echt unregelmässige Texturen", "Achte auf Besteck und Tellerränder"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80',
+    explanation: 'Dieses Food-Foto ist echt. Die natürlichen Texturen der Zutaten, authentische Farbvariationen und die organische Anordnung sind Kennzeichen eines echten Fotos.',
+    category: 'Essen',
+    difficulty: 2
   },
   {
-    id: "real_05",
-    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
-    type: "real",
-    category: "Landschaft",
-    difficulty: 2,
-    explanation: "Ein echtes Strandfoto mit authentischem Farbverlauf und natürlichen Wellenmustern. Die Sandkörner und das Wasser zeigen echte Unregelmässigkeiten.",
-    tips: ["KI-Strände sehen oft zu perfekt aus", "Achte auf die Schaumkronen der Wellen – sind sie natürlich?"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=900&q=80',
+    explanation: 'Dieses Stadtfoto ist echt. Die konsistenten Reflexionen, der natürliche Lichteinfall und die korrekte Perspektive aller Gebäude bestätigen die Echtheit.',
+    category: 'Stadt',
+    difficulty: 1
   },
   {
-    id: "real_06",
-    src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800&q=80",
-    type: "real",
-    category: "Tiere",
-    difficulty: 2,
-    explanation: "Eine echte Katze mit korrekten Augenreflexionen, natürlichem Fell und realistischem Blick.",
-    tips: ["Augen bei echten Fotos haben natürliche Reflexionen", "Schnurrhaare sind bei KI oft unregelmässig"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=900&q=80',
+    explanation: 'Dieses Hundefoto ist echt. Die natürlichen Fellvariationen, realistische Augen und die authentische Körperhaltung verraten ein echtes Tier.',
+    category: 'Tiere',
+    difficulty: 1
   },
   {
-    id: "real_07",
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
-    type: "real",
-    category: "Person",
-    difficulty: 2,
-    explanation: "Ein echtes Portrait mit natürlichen Gesichtszügen, leicht asymmetrischen Augenbrauen und realistischer Haut.",
-    tips: ["Echte Gesichter sind leicht asymmetrisch", "Haarsträhnen fallen natürlich und unregelmässig"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=900&q=80',
+    explanation: 'Dieses Foto ist echt. Die natürlichen Lichtverhältnisse, authentische Textur und die konsistente Schärfentiefe zeigen ein echtes, unbearbeitetes Foto.',
+    category: 'Tiere',
+    difficulty: 2
   },
   {
-    id: "real_08",
-    src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
-    type: "real",
-    category: "Alltag",
-    difficulty: 2,
-    explanation: "Ein echtes Geschäftsfoto mit natürlicher Beleuchtung, realistischen Materialien und echten Produkten.",
-    tips: ["Echte Geschäfte zeigen natürliche Unordnung", "Achte auf Textdetails auf Preisschildern"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80',
+    explanation: 'Dieses Porträt ist echt. Natürliche Hautporen, asymmetrische Gesichtszüge und authentische Beleuchtung sind schwer für KI nachzuahmen.',
+    category: 'Porträt',
+    difficulty: 2
   },
   {
-    id: "real_09",
-    src: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
-    type: "real",
-    category: "Landschaft",
-    difficulty: 3,
-    explanation: "Ein echtes Waldfoto mit natürlich wachsenden Bäumen, unregelmässigem Blattwerk und authentischem Waldboden.",
-    tips: ["KI-Wälder haben oft zu symmetrische Bäume", "Achte auf den Boden – Wurzeln und Blätter sind komplex"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=900&q=80',
+    explanation: 'Diese Landschaft ist echt. Die natürlichen Wolkenformationen, authentische Lichtstimmung und die realistische Tiefenwirkung verraten ein echtes Foto.',
+    category: 'Landschaft',
+    difficulty: 1
   },
   {
-    id: "real_10",
-    src: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=800&q=80",
-    type: "real",
-    category: "Person",
-    difficulty: 3,
-    explanation: "Ein echtes Portrait mit natürlichen Hautdetails, asymmetrischen Gesichtszügen und realistischen Augendetails.",
-    tips: ["Echte Gesichter haben Poren und kleine Unebenheiten", "Haarsträhnen fallen natürlich und unregelmässig"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1484591974057-265bb767ef71?w=900&q=80',
+    explanation: 'Dieses Foto ist echt. Die natürliche Unordnung, authentische Materialien und die konsistente Beleuchtung sind Merkmale einer echten Aufnahme.',
+    category: 'Innenräume',
+    difficulty: 2
   },
   {
-    id: "real_11",
-    src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
-    type: "real",
-    category: "Alltag",
-    difficulty: 2,
-    explanation: "Ein echtes Foto eines Arbeitsplatzes mit natürlichem Code auf dem Bildschirm, realistischer Tastatur und authentischer Beleuchtung.",
-    tips: ["Text auf Bildschirmen ist bei KI oft unleserlich", "Achte auf die Tastaturbeschriftung"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80',
+    explanation: 'Diese Naturaufnahme ist echt. Die stimmige Lichtstimmung, natürliche Farbverläufe und die realistische Schärfentiefe bestätigen die Echtheit.',
+    category: 'Natur',
+    difficulty: 1
   },
   {
-    id: "real_12",
-    src: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
-    type: "real",
-    category: "Architektur",
-    difficulty: 2,
-    explanation: "Ein echtes Architekturfoto mit korrekter Perspektive, realistischen Materialien und natürlicher Vegetation.",
-    tips: ["Achte auf Fensterreflexionen – stimmen sie überein?", "Pflanzen im Vordergrund sollten natürlich aussehen"]
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80',
+    explanation: 'Dieses Porträt ist echt. Authentische Hautstruktur, natürliche Haarsträhnen und echte Emotionen sind schwer zu fälschen.',
+    category: 'Porträt',
+    difficulty: 2
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=80',
+    explanation: 'Dieses Landschaftsfoto ist echt. Natürliche Wasserreflexionen, authentische Wolkenmuster und die stimmige Beleuchtung verraten ein echtes Foto.',
+    category: 'Landschaft',
+    difficulty: 1
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=900&q=80',
+    explanation: 'Dieses Essen-Foto ist echt. Die natürliche Farbgebung, verschiedene Texturen und die organische Anordnung der Zutaten zeigen ein echtes Foto.',
+    category: 'Essen',
+    difficulty: 2
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80',
+    explanation: 'Dieses Naturfoto ist echt. Die natürlichen Lichtverläufe, authentische Grasstrukturen und die realistische Atmosphäre bestätigen die Echtheit.',
+    category: 'Natur',
+    difficulty: 1
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=900&q=80',
+    explanation: 'Dieses Tierfoto ist echt. Der authentische Blick, natürliche Fellmuster und die realistische Schärfentiefe zeigen ein echtes Foto.',
+    category: 'Tiere',
+    difficulty: 1
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80',
+    explanation: 'Diese Berglandschaft ist ein echtes Foto. Die natürlichen Sternenmuster, authentische Schneestrukturen und stimmige Beleuchtung verraten ein echtes Foto.',
+    category: 'Landschaft',
+    difficulty: 2
+  },
+  {
+    type: 'real',
+    src: 'https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=900&q=80',
+    explanation: 'Dieses Strassenfoto ist echt. Die authentischen Schatten, natürliche Bewegungsunschärfe und die korrekte Perspektive bestätigen die Echtheit.',
+    category: 'Stadt',
+    difficulty: 2
   },
 
-  // --- KI-GENERIERTE BILDER (Platzhalter mit künstlichem Look) ---
+  // ===== KI-GENERIERTE BILDER (lokal) =====
   {
-    id: "ai_01",
-    src: "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=800&q=80",
-    type: "ai",
-    category: "Landschaft",
-    difficulty: 1,
-    explanation: "Dieses Bild hat typische KI-Merkmale: zu perfekte Symmetrie, traumartige Farbgebung und unwirklich gleichmässige Wolken.",
-    tips: ["Zu perfekte Landschaften sind oft KI-generiert", "Achte auf unnatürliche Farbverläufe"]
+    type: 'ai',
+    src: 'images/ai/portrait_woman.png',
+    explanation: 'Dieses Bild wurde von KI generiert. Typische Anzeichen: übermässig glatte Haut, perfekt symmetrisches Gesicht, die Augenpartie wirkt leicht künstlich, und die Haare haben eine zu gleichmässige Textur.',
+    category: 'Porträt',
+    difficulty: 2
   },
   {
-    id: "ai_02",
-    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80",
-    type: "ai",
-    category: "Person",
-    difficulty: 1,
-    explanation: "KI-generiertes Portrait: extrem glatte Haut, perfekt symmetrisches Gesicht und ein unscharfer Übergang zwischen Haaren und Hintergrund.",
-    tips: ["Zu perfekte Haut ohne Poren ist verdächtig", "Schau dir die Ohren genau an – KI vergisst oft Details"]
+    type: 'ai',
+    src: 'images/ai/landscape_mountains.png',
+    explanation: 'Dieses Bild ist KI-generiert. Die Reflexion im Wasser ist zu perfekt symmetrisch, die Farben wirken übernatürlich intensiv, und die Berge haben eine zu gleichmässige Struktur.',
+    category: 'Landschaft',
+    difficulty: 2
   },
   {
-    id: "ai_03",
-    src: "https://images.unsplash.com/photo-1425082661507-6af0db74ab07?w=800&q=80",
-    type: "ai",
-    category: "Tiere",
-    difficulty: 1,
-    explanation: "Dieses Tierbild ist KI-generiert: zu weiche Fellstruktur, unwirklich perfekter Hintergrund und übermässig detaillierte Augen.",
-    tips: ["Zu niedliche Tiere mit überdimensionalen Augen sind verdächtig", "Achte auf die Pfoten und Krallen"]
+    type: 'ai',
+    src: 'images/ai/city_street.png',
+    explanation: 'Dieses Bild wurde von KI erstellt. Achte auf die Schriften an den Geschäften – sie sehen aus wie echte Buchstaben, ergeben aber keinen klaren Sinn. Auch die Perspektive der Gebäude ist leicht inkonsistent.',
+    category: 'Stadt',
+    difficulty: 3
   },
   {
-    id: "ai_04",
-    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80",
-    type: "ai",
-    category: "Architektur",
-    difficulty: 1,
-    explanation: "Eine KI-generierte Szene: unwirkliche Beleuchtung, zu perfekte Spiegelungen und surreale Atmosphäre.",
-    tips: ["Unmögliche Lichtsituationen deuten auf KI hin", "Achte auf wiederkehrende Muster in der Szene"]
+    type: 'ai',
+    src: 'images/ai/cat_closeup.png',
+    explanation: 'Dieses Katzenbild ist KI-generiert. Die Fellstruktur ist zu gleichmässig, die Schnurrhaare haben eine unnatürlich perfekte Anordnung, und die Augen wirken zu symmetrisch.',
+    category: 'Tiere',
+    difficulty: 3
   },
   {
-    id: "ai_05",
-    src: "https://images.unsplash.com/photo-1535930749574-1399327ce78f?w=800&q=80",
-    type: "ai",
-    category: "Person",
-    difficulty: 2,
-    explanation: "KI-generiertes Bild: Achte auf ungewöhnlich perfekte Gesichtszüge und gleichmässige Beleuchtung ohne natürliche Schatten.",
-    tips: ["Zähle immer die Finger!", "Achte auf Schmuck und Accessoires – sind sie logisch?"]
+    type: 'ai',
+    src: 'images/ai/food_sushi.png',
+    explanation: 'Dieses Sushi-Bild ist KI-generiert. Die Blumen auf dem Teller sind unnatürlich platziert, einige Texturen wiederholen sich, und die Anordnung ist zu perfekt symmetrisch für ein echtes Food-Foto.',
+    category: 'Essen',
+    difficulty: 3
   },
   {
-    id: "ai_06",
-    src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80",
-    type: "ai",
-    category: "Alltag",
-    difficulty: 2,
-    explanation: "Dieses Food-Bild ist KI-generiert: die Pizza sieht zu perfekt aus, mit unrealistischen Glanzeffekten und zu gleichmässigem Belag.",
-    tips: ["Zu perfektes Essen ist verdächtig", "Achte auf den Hintergrund – verschwimmt er unnatürlich?"]
+    type: 'ai',
+    src: 'images/ai/interior_modern.png',
+    explanation: 'Dieses Innenraum-Bild ist KI-generiert. Beachte die zu perfekte Symmetrie des Raums, die unrealistisch sauberen Oberflächen und die Stadtsilhouette im Fenster, die leicht verzerrt wirkt.',
+    category: 'Innenräume',
+    difficulty: 3
   },
   {
-    id: "ai_07",
-    src: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80",
-    type: "ai",
-    category: "Tiere",
-    difficulty: 2,
-    explanation: "Ein KI-generierter Hund: leicht unrealistische Fellstruktur, zu perfekte Pose und ein weichgezeichneter Hintergrund.",
-    tips: ["KI-Fell hat oft eine seidige, zu gleichmässige Textur", "Hundenasen haben in echt eine einzigartige Textur"]
+    type: 'ai',
+    src: 'images/ai/portrait_man.png',
+    explanation: 'Dieses Porträt ist KI-generiert. Die Barthaare haben eine zu gleichmässige Textur, die Falten wirken leicht unnatürlich, und die Jackenknöpfe zeigen subtile Inkonsistenzen.',
+    category: 'Porträt',
+    difficulty: 2
   },
   {
-    id: "ai_08",
-    src: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80",
-    type: "ai",
-    category: "Architektur",
-    difficulty: 2,
-    explanation: "Ein KI-generierter Raum: zu perfekte Symmetrie, unrealistische Materialübergänge und fehlende Gebrauchsspuren.",
-    tips: ["Zu aufgeräumte, perfekte Räume sind oft KI", "Achte auf Steckdosen, Schalter und andere kleine Details"]
+    type: 'ai',
+    src: 'images/ai/beach_sunset.png',
+    explanation: 'Dieses Strandbild ist KI-generiert. Achte auf den "Vacation 2023"-Text im unteren Bereich – KI hat versucht, einen Fotoabzug-Stil zu imitieren. Auch die Palmensilhouetten sind zu perfekt gleichmässig.',
+    category: 'Landschaft',
+    difficulty: 2
   },
   {
-    id: "ai_09",
-    src: "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=800&q=80",
-    type: "ai",
-    category: "Landschaft",
-    difficulty: 3,
-    explanation: "Ein KI-generiertes Naturbild: zu perfekte Blütenblätter, unrealistische Schärfentiefe und zu symmetrische Anordnung.",
-    tips: ["Natur ist nie perfekt symmetrisch", "Achte auf Wassertropfen – sind sie zu rund und perfekt?"]
+    type: 'ai',
+    src: 'images/ai/golden_retriever.png',
+    explanation: 'Dieses Hundebild ist KI-generiert. Obwohl es sehr realistisch aussieht, zeigt das Fell eine zu gleichmässige Textur, und der Hintergrund verschwimmt auf eine unnatürlich gleichmässige Art.',
+    category: 'Tiere',
+    difficulty: 3
   },
   {
-    id: "ai_10",
-    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80",
-    type: "ai",
-    category: "Person",
-    difficulty: 3,
-    explanation: "Hochwertiges KI-Portrait: unrealistische Hautstruktur bei genauem Hinsehen, zu perfekter Haaransatz und unnatürlicher Iris-Rand.",
-    tips: ["Zoome auf die Augen – KI-Iris hat oft einen zu scharfen Rand", "Achte auf den Haaransatz – oft zu perfekt bei KI"]
+    type: 'ai',
+    src: 'images/ai/coffee_shop.png',
+    explanation: 'Dieses Café-Bild ist KI-generiert. Die Gesichter der Personen im Hintergrund sind unscharf und leicht verzerrt, die Speisekarte an der Wand enthält unleserlichen Text, und die Beleuchtung ist zu gleichmässig.',
+    category: 'Innenräume',
+    difficulty: 3
   },
   {
-    id: "ai_11",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
-    type: "ai",
-    category: "Person",
-    difficulty: 3,
-    explanation: "Schwer zu erkennende KI-generierte Person: fast perfekt, aber bei genauem Hinsehen zeigen sich Unstimmigkeiten in den Augenreflexionen.",
-    tips: ["Achte auf Spiegelungen in den Augen – bei KI stimmen sie oft nicht überein", "Ohren sind manchmal unterschiedlich detailliert"]
+    type: 'ai',
+    src: 'images/ai/autumn_forest.png',
+    explanation: 'Dieses Waldbild ist KI-generiert. Die Lichtstrahlen sind zu perfekt angeordnet, die Blätter haben eine repetitive Textur, und die Baumstämme zeigen eine unnatürlich gleichmässige Moosstruktur.',
+    category: 'Natur',
+    difficulty: 3
   },
   {
-    id: "ai_12",
-    src: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80",
-    type: "ai",
-    category: "Landschaft",
-    difficulty: 3,
-    explanation: "Schwer zu erkennende KI-Landschaft: Bäume wirken zu gleichmässig, Farben sind etwas zu intensiv und einheitlich.",
-    tips: ["Wasserreflexionen sind bei KI oft zu perfekt", "Achte auf wiederholende Muster bei Blättern"]
+    type: 'ai',
+    src: 'images/ai/dog_park.png',
+    explanation: 'Dieses Bild ist KI-generiert. Der Hund hat subtile anatomische Unstimmigkeiten, die Rasenstruktur wiederholt sich, und die Schatten passen nicht ganz zur Lichtquelle.',
+    category: 'Tiere',
+    difficulty: 2
   },
   {
-    id: "ai_13",
-    src: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&q=80",
-    type: "ai",
-    category: "Alltag",
-    difficulty: 3,
-    explanation: "Ein KI-generiertes Produktfoto: zu perfekte Oberfläche, unrealistische Spiegelungen und fehlende natürliche Abnutzung.",
-    tips: ["Produktfotos ohne echtes Logo oder Markenname sind verdächtig", "Achte auf Spiegelungen – stimmen sie mit der Umgebung überein?"]
+    type: 'ai',
+    src: 'images/ai/young_man.png',
+    explanation: 'Dieses Bild ist KI-generiert. Der Buchtitel "The Quiet Hours" wirkt zwar authentisch, aber die Hände und Finger zeigen subtile Anomalien. Auch die Pflanzen im Hintergrund wiederholen sich auffällig.',
+    category: 'Porträt',
+    difficulty: 3
   }
 ];
 
-// ============================================================
-// TEXT-QUIZ DATEN
-// ============================================================
-
+// --- TEXT-QUIZ ---
 const TEXT_QUIZ_DATA = [
+  // ===== ECHTE TEXTE =====
   {
-    id: "text_real_01",
-    content: "Die Schweizer Bundesbahnen (SBB) haben angekündigt, dass ab dem Fahrplanwechsel im Dezember 2025 auf der Strecke Zürich–St. Gallen zusätzliche Verbindungen eingeführt werden. Dies soll die Kapazitäten während der Stosszeiten um rund 15 Prozent erhöhen. «Wir reagieren damit auf die steigende Nachfrage», sagte SBB-Sprecherin Sabine Müller.",
-    type: "real",
-    category: "Nachricht",
-    difficulty: 1,
-    explanation: "Dieser Text enthält spezifische Details (konkreter Prozentsatz, Name der Sprecherin, Datum), die typisch für echte Nachrichtenartikel sind.",
-    tips: ["Echte Nachrichtenartikel nennen konkrete Quellen mit Namen", "Spezifische Zahlen und Daten sind ein gutes Zeichen"]
+    type: 'real',
+    content: 'Die Schweiz hat im vergangenen Jahr einen Anstieg der Temperaturen um 0,3 Grad verzeichnet. Experten warnen vor den langfristigen Auswirkungen auf die Gletscher. «Wenn wir nicht sofort handeln, könnten bis 2050 mehr als die Hälfte der Schweizer Gletscher verschwunden sein», sagte Professor Markus Lüthi von der ETH Zürich der NZZ.',
+    explanation: 'Dies ist ein echter Text. Die spezifische Namensnennung (Prof. Markus Lüthi), die präzise Quellenangabe (NZZ), der sachliche Ton und die verwendung von Schweizer Anführungszeichen «» sind typisch für echten Journalismus.',
+    category: 'Nachrichten',
+    difficulty: 1
   },
   {
-    id: "text_real_02",
-    content: "Gestern war echt ein komischer Tag. Zuerst hab ich den Bus verpasst, dann hat's angefangen zu regnen und natürlich – klar – hatte ich keinen Schirm dabei. Im Unterricht bei Frau Keller war ich dann auch noch total unkonzentriert. Naja, wenigstens war die Mittagspause lustig, weil Joel seinen Pudding fallen gelassen hat 😂",
-    type: "real",
-    category: "Social Media",
-    difficulty: 2,
-    explanation: "Dieser Text hat typische Merkmale von echten Social-Media-Posts: Umgangssprache, Emoji-Nutzung, spezifische persönliche Details und eine natürliche, ungezwungene Schreibweise.",
-    tips: ["Echte Posts haben natürliche Tippfehler und Umgangssprache", "Spezifische Details über reale Personen und Orte sind typisch"]
+    type: 'real',
+    content: 'hab gestern beim coop die falsche milch gekauft lol. wollte laktosefrei und hab dann erst zuhause gemerkt dass es normale war 🤦‍♀️ naja morgen geh ich nochmal hin. kennt ihr das??',
+    explanation: 'Dies ist ein echter Text. Die Umgangssprache, Tippfehler, fehlende Grossschreibung, das Emoji und der informelle Ton sind typisch für echte Social-Media-Posts. KI schreibt meist grammatikalisch korrekter.',
+    category: 'Social Media',
+    difficulty: 1
   },
   {
-    id: "text_real_03",
-    content: "Die Kantonsschule am Brühl bietet drei verschiedene Bildungsgänge an: die Fachmittelschule (FMS), die Informatikmittelschule (IMS) und die Wirtschaftsmittelschule (WMS). Alle drei Ausbildungen dauern vier Jahre und schliessen mit einem eidgenössisch anerkannten Abschluss ab. Die Schule blickt auf eine über 100-jährige Geschichte zurück und befindet sich im Herzen von St. Gallen.",
-    type: "real",
-    category: "Informationstext",
-    difficulty: 2,
-    explanation: "Ein sachlicher, informierender Text mit überprüfbaren Fakten über die KSB. Die Sprache ist korrekt, aber natürlich und die Informationen sind präzise.",
-    tips: ["Texte über existierende Institutionen können überprüft werden", "Sachliche Sprache ≠ automatisch KI"]
+    type: 'real',
+    content: 'Das Abkommen von Paris setzt den Rahmen für die internationale Klimapolitik. Doch die Umsetzung bleibt umstritten: Während die EU ambitionierte Ziele formuliert, bremsen grosse Emittenten wie China und Indien. Die Schweiz positioniert sich als Vermittlerin, was ihr auf internationaler Bühne zwar Respekt, aber auch Kritik einbringt.',
+    explanation: 'Dies ist ein echter Text. Die differenzierte Argumentation, das Abwägen verschiedener Perspektiven und die nuancierte Darstellung der Schweizer Position deuten auf einen erfahrenen Journalisten hin.',
+    category: 'Nachrichten',
+    difficulty: 2
   },
   {
-    id: "text_real_04",
-    content: "Sehr geehrte Eltern\n\nWir möchten Sie darüber informieren, dass am Freitag, 14. März 2025, der Unterricht aufgrund einer schulinternen Weiterbildung bereits um 12:15 Uhr endet. Die Mittagsbetreuung findet wie gewohnt statt. Bitte stellen Sie sicher, dass Ihr Kind abgeholt wird oder selbstständig nach Hause gelangen kann.\n\nFreundliche Grüsse\nDie Schulleitung",
-    type: "real",
-    category: "E-Mail",
-    difficulty: 2,
-    explanation: "Ein typischer Elternbrief mit konkretem Datum, spezifischer Uhrzeit und klaren Handlungsanweisungen. Der formelle Ton ist für offizielle Schulkommunikation normal.",
-    tips: ["Offizielle Kommunikation hat einen formellen, aber nicht übertriebenen Ton", "Konkrete Daten und Uhrzeiten sprechen für Echtheit"]
+    type: 'real',
+    content: 'Liebi Kolleginne und Kollege\n\nI möcht eu dra erinnere, dass am Fritig de letschti Tag isch zum sich für de Teamusflug azmelde. Mir gönd nach Appezöll go wandere und naschhär no öppis ässe. Bitte melded eu bi mir oder bi de Sandra.\n\nLiebe Grüess\nMarkus',
+    explanation: 'Dies ist ein echter Text. Der schweizerdeutsche Dialekt mit typischen Ausdrücken wie «eu dra erinnere», «de letschti Tag» und «naschhär no öppis ässe» ist für KI extrem schwer korrekt nachzubilden.',
+    category: 'E-Mail',
+    difficulty: 1
   },
   {
-    id: "text_real_05",
-    content: "Also ich finde die neue Mensa mega. Das Angebot ist viel besser als vorher und die Preise sind okay. Nur die Schlange ist halt immer noch viel zu lang in der grossen Pause. Gestern musste ich 15 Minuten anstehen und dann war das Poulet schon aus. Voll nervig. Aber die neuen Desserts sind fire 🔥",
-    type: "real",
-    category: "Social Media",
-    difficulty: 1,
-    explanation: "Authentischer Schülerkommentar mit Jugendsprache, konkreten Erfahrungen und einer Mischung aus positiver und negativer Kritik.",
-    tips: ["Echte Kommentare sind selten nur positiv oder nur negativ", "Jugendsprache und Slang deuten auf echte Schüler hin"]
+    type: 'real',
+    content: 'Ich weiss nicht, was ich machen soll. Die Prüfung in Mathe war eine Katastrophe, obwohl ich drei Tage lang gelernt habe. Frau Müller hat gesagt, ich könnte die Nachprüfung machen, aber dann muss ich das Wochenende bei Oma absagen und sie hat sich so gefreut auf uns. Manchmal ist alles einfach zu viel.',
+    explanation: 'Dies ist ein echter Text. Die emotionale Authentizität, die spezifischen Details (Frau Müller, Wochenende bei Oma) und das Gefühl der Überforderung wirken sehr persönlich und echt.',
+    category: 'Persönlich',
+    difficulty: 2
   },
   {
-    id: "text_real_06",
-    content: "BREAKING: Grossbrand in Lagerhalle in Gossau SG – Die Kantonspolizei St. Gallen meldet einen Grossbrand in einer Lagerhalle an der Industriestrasse. Die Feuerwehr ist mit einem Grossaufgebot vor Ort. Die Strasse ist gesperrt. Verletzt wurde gemäss ersten Informationen niemand. Die Brandursache ist noch unklar. Update folgt.",
-    type: "real",
-    category: "Nachricht",
-    difficulty: 2,
-    explanation: "Typische Eilmeldung: kurze Sätze, konkrete Ortsangabe, Nennung der Quelle (Kantonspolizei), Eingeständnis von Unsicherheit («noch unklar», «gemäss ersten Informationen»).",
-    tips: ["Echte Eilmeldungen geben zu, was sie noch nicht wissen", "Spezifische Quellenangaben sprechen für Echtheit"]
+    type: 'real',
+    content: 'Zutaten für 4 Personen:\n- 400g Älplermagronen\n- 200g Gruyère, gerieben\n- 3 grosse Kartoffeln, gewürfelt\n- 2 Zwiebeln\n- 2.5 dl Rahm\n\nKartoffeln ca. 10 Min. kochen. Magronen nach Packungsanleitung beifügen. Rahm und Käse unterheben. Zwiebeln separat in Butter goldbraun braten. Über die Magronen geben. Dazu passt Apfelmus!',
+    explanation: 'Dies ist ein echter Text. Das traditionelle Schweizer Rezept mit typischen Zutaten (Gruyère, Rahm, Apfelmus), den konkreten Mengenangaben und der praktischen Anleitung zeigt einen authentischen Rezepttext.',
+    category: 'Rezept',
+    difficulty: 1
   },
   {
-    id: "text_real_07",
-    content: "Protokoll der Schülerratssitzung, 22. Januar 2025\n\nAnwesend: 14 von 18 Mitgliedern\nEntschuldigt: L. Meier, T. Nguyen, A. Schmidt, F. Yilmaz\n\nTraktandum 1: Planung Frühlingsfest\n- Datum: 4. April 2025\n- Budget: CHF 2'800 (davon CHF 1'500 vom Schulbudget)\n- OK: Auf Antrag von M. Bühler wurde die Genehmigung einstimmig erteilt\n\nTraktandum 2: Wunsch nach Getränkeautomat\n- Diskussion: Mehrheitlich dafür, aber Bedenken wegen Littering\n- Entscheid: Anfrage an Schulleitung wird formuliert (Verantwortlich: R. Petrovic)",
-    type: "real",
-    category: "Dokument",
-    difficulty: 3,
-    explanation: "Authentisches Protokoll mit typischen Merkmalen: konkrete Namen, Abstimmungsergebnisse, Budget-Details und klare Zuständigkeiten.",
-    tips: ["Protokolle haben eine sehr spezifische Struktur", "Konkrete Namen und Budget-Zahlen sprechen für Echtheit"]
+    type: 'real',
+    content: 'Die Gemeinde informiert: Aufgrund von Leitungsarbeiten der Wasserversorgung ist die Hauptstrasse zwischen Kreuzung Adler und Gemeindehaus von Montag, 18. März bis voraussichtlich Freitag, 22. März gesperrt. Eine Umleitung via Bergstrasse ist signalisiert. Wir bitten um Verständnis.',
+    explanation: 'Dies ist ein echter Text. Die spezifischen Ortsnamen, präzisen Datumsangaben und der formelle Behörden-Ton mit der Bitte um Verständnis sind typisch für echte Gemeindeinformationen.',
+    category: 'Behörden',
+    difficulty: 1
   },
   {
-    id: "text_ai_01",
-    content: "Die Digitalisierung stellt unsere Gesellschaft vor vielfältige Herausforderungen und Chancen zugleich. Einerseits ermöglicht sie eine beispiellose Vernetzung und den Zugang zu Informationen, andererseits birgt sie Risiken wie Datenschutzbedenken und die Verbreitung von Falschinformationen. Es ist daher von entscheidender Bedeutung, dass wir einen ausgewogenen und reflektierten Umgang mit digitalen Technologien pflegen.",
-    type: "ai",
-    category: "Informationstext",
-    difficulty: 1,
-    explanation: "Typischer KI-Text: sehr allgemein, keine konkreten Beispiele, ausgewogene «Einerseits-Andererseits»-Struktur, und übertrieben formelle Sprache ohne persönliche Note.",
-    tips: ["KI-Texte sind oft zu ausgewogen ohne eigene Meinung", "Fehlende konkrete Beispiele sind verdächtig", "Übermässig formelle Sprache ohne persönliche Note"]
+    type: 'real',
+    content: 'haha mega fail im training heute 😂 wollte den Ball annehmen und bin voll auf die Fresse geflogen. Der ganze Platz hat gelacht, sogar der Trainer. Naja wenigstens hab ich nachher noch 2 Tore geschossen, revenge ist süss 💪⚽',
+    explanation: 'Dies ist ein echter Text. Die spontane Erzählung, Umgangssprache, Emojis und die natürliche Abfolge von Peinlichkeit und Triumph sind typisch für echte persönliche Beiträge.',
+    category: 'Social Media',
+    difficulty: 1
   },
   {
-    id: "text_ai_02",
-    content: "St. Gallen, eine wunderschöne Stadt im Herzen der Ostschweiz, besticht durch ihre malerische Altstadt und die berühmte Stiftsbibliothek, die zum UNESCO-Weltkulturerbe gehört. Die Stadt bietet eine perfekte Mischung aus Tradition und Moderne, mit einer lebendigen Kulturszene, erstklassigen Gastronomie und atemberaubenden Ausblicken auf den Bodensee und die Alpen. Ob Geschichte, Kunst oder Natur – St. Gallen hat für jeden etwas zu bieten.",
-    type: "ai",
-    category: "Informationstext",
-    difficulty: 2,
-    explanation: "KI-generierter Werbetext: übertrieben positiv, Verwendung von Superlativen («wunderschöne», «erstklassigen», «atemberaubenden»), klischeehafte Formulierungen und keine persönliche Erfahrung.",
-    tips: ["Übermässig viele Superlative deuten auf KI hin", "KI-Texte klingen oft wie Werbetexte", "Klischeehafte Beschreibungen sind verdächtig"]
+    type: 'real',
+    content: 'Sehr geehrter Herr Meier\n\nBezugnehmend auf unser Telefongespräch vom 5. Februar bestätige ich den Termin für die Besprechung am 20. Februar um 14:00 Uhr in unserem Büro an der Bahnhofstrasse 12. Bitte bringen Sie die Unterlagen zum Baugesuch mit.\n\nFreundliche Grüsse\nAnna Keller\nGemeindebauamt',
+    explanation: 'Dies ist ein echter Text. Die formelle Geschäftssprache, spezifische Terminangaben, die konkrete Adresse und die korrekte Schweizer Briefform zeigen einen authentischen Behördenbrief.',
+    category: 'Behörden',
+    difficulty: 1
   },
   {
-    id: "text_ai_03",
-    content: "Hey, ich wollte dir nur sagen, dass der Ausflug heute wirklich grossartig war. Die Wanderung war angenehm und die Aussicht war einfach atemberaubend. Es war ein perfekter Tag mit perfektem Wetter und perfekter Gesellschaft. Ich bin dankbar für diese wundervolle Erfahrung und freue mich schon auf das nächste Mal.",
-    type: "ai",
-    category: "Social Media",
-    difficulty: 1,
-    explanation: "KI-generierte Nachricht: zu perfekt formuliert für eine informelle Nachricht, übermässig positiv, wiederholende Satzstruktur («perfekter Tag, perfektes Wetter, perfekte Gesellschaft»), keine echten Details oder Umgangssprache.",
-    tips: ["Echte Nachrichten sind selten durchgehend positiv", "Wiederholende Satzstrukturen sind typisch für KI", "Fehlende Umgangssprache in informellen Texten ist verdächtig"]
+    type: 'real',
+    content: 'Was viele nicht wissen: Der Bodensee gehört zu keinem Staat vollständig. Die Grenzen im See sind bis heute nicht verbindlich geregelt. Während Deutschland und Österreich von einer Haldentheorie ausgehen, vertritt die Schweiz die Realteilungstheorie. Ein Kuriosum, das seit über 100 Jahren besteht und vermutlich nie gelöst wird.',
+    explanation: 'Dies ist ein echter Text. Die spezifische Faktenlage zur Bodensee-Grenze, die korrekten juristischen Begriffe und die differenzierte Darstellung verraten fundiertes Wissen.',
+    category: 'Wissen',
+    difficulty: 2
   },
   {
-    id: "text_ai_04",
-    content: "Liebe Schülerinnen und Schüler,\n\nDas Erlernen einer neuen Sprache ist eine bereichernde Erfahrung, die viele Vorteile mit sich bringt. Es fördert nicht nur die kognitiven Fähigkeiten, sondern erweitert auch den kulturellen Horizont und schafft neue Möglichkeiten in der beruflichen Laufbahn. Jede Sprache öffnet ein Fenster zu einer neuen Welt des Verstehens und der Kommunikation. Bleiben Sie motiviert und nutzen Sie jede Gelegenheit zum Üben!",
-    type: "ai",
-    category: "E-Mail",
-    difficulty: 2,
-    explanation: "KI-generierter Motivationstext: allgemeine Aussagen ohne konkrete Anweisungen, keine spezifische Sprache genannt, übertrieben inspirierende Sprache und abgedroschene Metaphern.",
-    tips: ["Echte Lehrkräfte geben konkrete Anweisungen", "Allgemeine Motivationssprüche ohne Kontext sind oft KI", "Fehlende spezifische Details (welche Sprache? welches Fach?)"]
+    type: 'real',
+    content: 'Am Samstag Nacht hend mir s Openair in Frauefäld bsuecht. S Wetter isch mega gsi, d Bands au – vorallem bi Stress isch d Stimmig explodiert. Leider hend mir denn s letschte Zügli verpasst und hend müesse Taxi näh. Hät 120 Stutz koscht, aber s isch es wert gsi!',
+    explanation: 'Dies ist ein echter Text. Der authentische Schweizerdeutsch-Dialekt mit typischen Ausdrücken wie «hend mir», «Stutz», «s letschte Zügli» und der informelle Erzählstil sind für KI kaum imitierbar.',
+    category: 'Social Media',
+    difficulty: 1
   },
   {
-    id: "text_ai_05",
-    content: "Die Schweiz ist ein faszinierendes Land, das für seine atemberaubende Natur, seine reiche Geschichte und seine vielfältige Kultur bekannt ist. Von den majestätischen Alpen bis hin zu den malerischen Seen bietet die Schweiz eine einzigartige Kombination aus natürlicher Schönheit und kultureller Vielfalt. Die Schweizer Bevölkerung zeichnet sich durch ihre Mehrsprachigkeit, ihre Gastfreundschaft und ihren Innovationsgeist aus.",
-    type: "ai",
-    category: "Informationstext",
-    difficulty: 1,
-    explanation: "Typischer KI-Text über die Schweiz: enthält nur Klischees und Allgemeinplätze, keine persönliche Perspektive, übertrieben positive Sprache mit vielen Adjektiven.",
-    tips: ["Texte voller Klischees ohne neue Informationen sind verdächtig", "KI nutzt oft übertrieben viele Adjektive", "Fehlende persönliche oder kritische Perspektive"]
+    type: 'real',
+    content: 'Die Kantonspolizei St.Gallen meldet: Gestern Nachmittag kam es auf der A1 bei Gossau zu einem Auffahrunfall mit drei beteiligten Fahrzeugen. Eine 34-jährige Lenkerin wurde leicht verletzt und musste ins Kantonsspital gebracht werden. Der Sachschaden wird auf rund 25\'000 Franken geschätzt. Die genaue Unfallursache wird untersucht.',
+    explanation: 'Dies ist ein echter Text. Die typische Polizeimeldung mit spezifischen Details (Alter, Ort, Schadenshöhe), der sachliche Ton und die korrekte Verwendung von Schweizer Franken-Notation zeigen einen echten Behördenbericht.',
+    category: 'Nachrichten',
+    difficulty: 1
+  },
+
+  // ===== KI-GENERIERTE TEXTE =====
+  {
+    type: 'ai',
+    content: 'Der Klimawandel stellt eine der grössten Herausforderungen unserer Zeit dar. Die steigenden Temperaturen führen zu dramatischen Veränderungen in unseren Ökosystemen. Von schmelzenden Gletschern bis hin zu häufigeren Extremwetterereignissen – die Auswirkungen sind vielfältig und weitreichend. Es ist von entscheidender Bedeutung, dass wir gemeinsam handeln, um unseren Planeten für zukünftige Generationen zu bewahren.',
+    explanation: 'Dieser Text wurde von KI generiert. Typische Merkmale: aufzählende Struktur mit "Von ... bis hin zu", Phrasen wie "von entscheidender Bedeutung", allgemeine Aussagen ohne konkrete Daten oder Quellen, und ein auffällig ausgeglichener, belehrender Ton.',
+    category: 'Nachrichten',
+    difficulty: 1
   },
   {
-    id: "text_ai_06",
-    content: "Sehr geehrte Damen und Herren,\n\nIch schreibe Ihnen, um meine Gedanken über die bemerkenswerte Entwicklung der modernen Technologie zu teilen. In einer Welt, die sich ständig weiterentwickelt, ist es von grösster Bedeutung, dass wir die Chancen nutzen, die uns die digitale Revolution bietet, während wir gleichzeitig die damit verbundenen Herausforderungen verantwortungsbewusst angehen.\n\nMit freundlichen Grüssen",
-    type: "ai",
-    category: "E-Mail",
-    difficulty: 2,
-    explanation: "KI-generierte E-Mail: kein konkreter Anlass genannt, allgemeine Phrasen, kein Absender, Thema bleibt vage. Eine echte E-Mail hätte einen konkreten Grund.",
-    tips: ["Echte E-Mails haben immer einen konkreten Grund", "Fehlender Absendername ist verdächtig", "Allgemeine Phrasen ohne konkreten Inhalt deuten auf KI"]
+    type: 'ai',
+    content: 'Die Digitalisierung revolutioniert unsere Gesellschaft in einem beispiellosen Tempo. Künstliche Intelligenz, maschinelles Lernen und das Internet der Dinge sind nur einige der Technologien, die unser tägliches Leben grundlegend verändern. In einer zunehmend vernetzten Welt ist es wichtiger denn je, digitale Kompetenzen zu entwickeln und sich an die neuen Gegebenheiten anzupassen.',
+    explanation: 'Dieser Text ist KI-generiert. Die Aneinanderreihung von Buzzwords (KI, maschinelles Lernen, IoT), die allgemeinen Floskeln und das Fehlen konkreter Beispiele sind typische KI-Merkmale.',
+    category: 'Technologie',
+    difficulty: 1
   },
   {
-    id: "text_ai_07",
-    content: "Die Herbstferien nähern sich mit grossen Schritten und viele Familien freuen sich bereits auf eine wohlverdiente Auszeit vom Alltag. Ob man nun in die Berge fährt, einen Städtetrip plant oder einfach die Zeit zu Hause geniesst – die Herbstferien bieten eine ideale Gelegenheit, neue Energie zu tanken und gemeinsame Erinnerungen zu schaffen. Besonders für Schülerinnen und Schüler sind die Ferien eine wichtige Phase der Erholung.",
-    type: "ai",
-    category: "Informationstext",
-    difficulty: 2,
-    explanation: "KI-generierter Allgemeinplatz: keine konkreten Jahreszahlen, keine spezifischen Empfehlungen, übermässig positive und allgemeine Sprache.",
-    tips: ["Fehlende Jahreszahlen und spezifische Daten sind verdächtig", "KI listet gerne Optionen auf ohne sich festzulegen («ob... oder... oder»)"]
+    type: 'ai',
+    content: 'Die beeindruckende Vielfalt der Schweizer Küche spiegelt die kulturelle Reichhaltigkeit des Landes wider. Von den cremigen Fondues der Westschweiz über die herzhaften Rösti der Deutschschweiz bis hin zu den delikaten Risotti des Tessins – jede Region trägt ihre einzigartigen kulinarischen Traditionen bei. Diese gastronomische Diversität macht die Schweiz zu einem wahren Paradies für Feinschmecker.',
+    explanation: 'Dieser Text ist KI-generiert. Die übertrieben positive, werbeartige Sprache ("wahres Paradies"), die "Von ... über ... bis hin zu"-Struktur und die gleichförmige Adjektiv-Substantiv-Kombinationen verraten die KI.',
+    category: 'Kultur',
+    difficulty: 1
+  },
+  {
+    type: 'ai',
+    content: 'In der heutigen schnelllebigen Welt ist mentale Gesundheit von grösster Bedeutung. Stressmanagement-Techniken, regelmässige Bewegung und eine ausgewogene Ernährung bilden die drei Säulen eines gesunden Lebensstils. Darüber hinaus spielen soziale Kontakte eine wichtige Rolle für unser psychisches Wohlbefinden. Es ist daher ratsam, aktiv Strategien zur Förderung der eigenen mentalen Gesundheit zu entwickeln.',
+    explanation: 'Dieser Text ist KI-generiert. Die typische "drei Säulen"-Metapher, allgemeine Ratschläge ohne persönliche Note, und die belehrende Formulierung "Es ist daher ratsam" sind klare KI-Merkmale.',
+    category: 'Gesundheit',
+    difficulty: 1
+  },
+  {
+    type: 'ai',
+    content: 'Liebe Lehrerinnen und Lehrer,\n\ndie Integration von künstlicher Intelligenz in den Bildungsbereich eröffnet faszinierende Möglichkeiten für den modernen Unterricht. Adaptive Lernplattformen können den individuellen Lernstand jedes Schülers analysieren und massgeschneiderte Übungen bereitstellen. Gleichzeitig ist es wichtig, einen verantwortungsvollen Umgang mit diesen Technologien zu fördern und die menschliche Komponente des Lehrens nicht zu vernachlässigen.',
+    explanation: 'Dieser Text ist KI-generiert. Die übermässig ausgewogene Argumentation, die Phrasen "faszinierende Möglichkeiten" und "verantwortungsvollen Umgang", sowie das perfekte "einerseits-andererseits"-Muster sind typische KI-Merkmale.',
+    category: 'Bildung',
+    difficulty: 2
+  },
+  {
+    type: 'ai',
+    content: 'Die Alpen sind nicht nur ein beeindruckendes Naturwunder, sondern auch ein bedeutendes kulturelles Erbe der Schweiz. Die majestätischen Gipfel, kristallklaren Seen und saftigen Almwiesen bilden eine Landschaft von unvergleichlicher Schönheit. Jedes Jahr zieht diese atemberaubende Szenerie Millionen von Besuchern aus aller Welt an, die die Harmonie von Natur und Tradition erleben möchten.',
+    explanation: 'Dieser Text ist KI-generiert. Die übertrieben poetische Sprache ("majestätische Gipfel", "kristallklare Seen", "atemberaubende Szenerie") und die allgemeinen Floskeln ohne konkrete Informationen sind typisch für KI.',
+    category: 'Reisen',
+    difficulty: 1
+  },
+  {
+    type: 'ai',
+    content: 'Es war ein regnerischer Dienstagmorgen, als Elena die alte Bibliothek betrat. Der Geruch von altem Papier und Holzpolitur umhüllte sie wie eine warme Decke. Ihre Finger glitten über die ledergebundenen Buchrücken, bis sie den Band fand, nach dem sie gesucht hatte. Mit klopfendem Herzen schlug sie die erste Seite auf und wusste: Dieses Buch würde alles verändern.',
+    explanation: 'Dieser Text ist KI-generiert. Die klischeehafte literarische Sprache, übertriebene Sinnesbeschreibungen ("wie eine warme Decke"), das dramatische Ende und die vorhersehbare Spannungsaufbaustruktur sind typisch für KI-Geschichten.',
+    category: 'Literatur',
+    difficulty: 2
+  },
+  {
+    type: 'ai',
+    content: 'Die effektive Nutzung von Solarenergie erfordert ein grundlegendes Verständnis der dahinterliegenden Technologie. Photovoltaik-Module wandeln Sonnenlicht direkt in elektrische Energie um, wobei der Wirkungsgrad moderner Anlagen stetig zunimmt. In Kombination mit intelligenten Speicherlösungen können Haushalte ihren Eigenverbrauch optimieren und somit einen wichtigen Beitrag zur Energiewende leisten.',
+    explanation: 'Dieser Text ist KI-generiert. Die Fachwörter wie "Photovoltaik-Module" und "Wirkungsgrad" werden oberflächlich verwendet, ohne echte Expertise zu zeigen. Die optimistische Schlussfolgerung und die allgemeine Struktur verraten die KI.',
+    category: 'Technologie',
+    difficulty: 2
+  },
+  {
+    type: 'ai',
+    content: 'In einer Welt, die sich rasant verändert, ist Anpassungsfähigkeit zu einer Schlüsselkompetenz geworden. Unternehmen, die in der Lage sind, sich schnell an neue Marktbedingungen anzupassen, werden langfristig erfolgreich sein. Die Fähigkeit, Chancen in Herausforderungen zu erkennen und innovative Lösungen zu entwickeln, unterscheidet die Gewinner von den Verlierern in der modernen Geschäftswelt.',
+    explanation: 'Dieser Text ist KI-generiert. Die Motivationsredner-Sprache, allgemeine Business-Floskeln ("Schlüsselkompetenz", "Gewinner von den Verlierern"), und das Fehlen konkreter Beispiele oder Daten sind klare KI-Merkmale.',
+    category: 'Wirtschaft',
+    difficulty: 1
+  },
+  {
+    type: 'ai',
+    content: 'Das Geheimnis eines guten Espressos liegt in der perfekten Kombination aus frisch gemahlenen Bohnen, der richtigen Wassertemperatur und dem optimalen Druck. Die ideale Extraktionszeit beträgt 25-30 Sekunden, wodurch ein harmonisches Gleichgewicht zwischen Säure und Bitterkeit entsteht. Ein perfekter Espresso zeichnet sich durch eine goldbraune Crema und ein volles, rundes Aroma aus.',
+    explanation: 'Dieser Text ist KI-generiert. Obwohl die technischen Details korrekt sind, verrät der übermässig systematische Aufbau, die "perfekt"-Wiederholungen und die lehrbuchhafte Struktur die KI-Herkunft.',
+    category: 'Essen',
+    difficulty: 2
+  },
+  {
+    type: 'ai',
+    content: 'Soziale Medien haben die Art und Weise, wie wir kommunizieren, grundlegend verändert. Sie bieten nicht nur eine Plattform für den Austausch von Ideen und Informationen, sondern schaffen auch neue Formen der sozialen Interaktion. Gleichzeitig bringen sie Herausforderungen mit sich, darunter Datenschutzbedenken, die Verbreitung von Fehlinformationen und die Auswirkungen auf die psychische Gesundheit, insbesondere bei jungen Menschen.',
+    explanation: 'Dieser Text ist KI-generiert. Die ausgewogene Pro-Contra-Struktur, die aufzählenden Formulierungen und der übermässig sachliche Tonfall ohne persönliche Meinung sind klare Merkmale eines KI-Texts.',
+    category: 'Technologie',
+    difficulty: 1
+  },
+  {
+    type: 'ai',
+    content: 'Die Kunst des Gärtnerns erfordert Geduld, Hingabe und ein tiefes Verständnis für die Bedürfnisse der Pflanzen. Ein gut angelegter Garten ist mehr als nur ein Ort der Schönheit – er ist ein lebendiges Ökosystem, das sorgfältige Pflege und Aufmerksamkeit verdient. Von der Bodenaufbereitung über die Pflanzenwahl bis hin zur Bewässerung – jeder Schritt trägt zum Gesamterfolg bei.',
+    explanation: 'Dieser Text ist KI-generiert. Die "mehr als nur"-Wendung, die "Von ... über ... bis hin zu"-Aufzählung und das allgemeine, belehrende Muster ohne praktische Details verraten die KI-Herkunft.',
+    category: 'Natur',
+    difficulty: 1
   }
 ];
 
-// ============================================================
-// TIPPS & TRICKS DATEN
-// ============================================================
-
+// --- TIPPS & TRICKS ---
 const TIPS_DATA = {
   images: {
-    title: "KI-Bilder erkennen",
-    icon: "🖼️",
     sections: [
       {
-        title: "Hände & Finger",
-        icon: "✋",
-        content: "KI hat nach wie vor Schwierigkeiten mit Händen. Zähle die Finger – oft sind es zu viele oder zu wenige. Fingergelenke können unnatürlich gebogen oder verschmolzen erscheinen.",
-        difficulty: "Leicht erkennbar"
+        title: 'Hände & Finger',
+        content: 'KI hat nach wie vor Schwierigkeiten mit Händen. Zähle die Finger – oft sind es zu viele oder zu wenige. Fingergelenke können unnatürlich gebogen oder verschmolzen erscheinen.',
+        difficulty: 'Leicht erkennbar'
       },
       {
-        title: "Augen & Gesichter",
-        icon: "👁️",
-        content: "KI-Gesichter sind oft zu symmetrisch. Echte Gesichter haben leichte Asymmetrien. Achte auf die Iris – bei KI hat sie oft einen zu scharfen oder unnatürlichen Rand. Ohrringe oder Ohren sind manchmal nicht identisch.",
-        difficulty: "Mittel"
+        title: 'Augen & Gesichter',
+        content: 'KI-Gesichter sind oft zu symmetrisch. Echte Gesichter haben leichte Asymmetrien. Achte auf die Iris – bei KI hat sie oft einen zu scharfen oder unnatürlichen Rand. Ohrringe oder Ohren sind manchmal nicht identisch.',
+        difficulty: 'Mittel'
       },
       {
-        title: "Text im Bild",
-        icon: "📝",
-        content: "Text auf Schildern, Büchern oder Bildschirmen ist oft der grösste Schwachpunkt von KI. Die Buchstaben sehen aus wie echte Schrift, ergeben aber keinen Sinn oder enthalten Fehler.",
-        difficulty: "Leicht erkennbar"
+        title: 'Text im Bild',
+        content: 'Text auf Schildern, Büchern oder Bildschirmen ist oft der grösste Schwachpunkt von KI. Die Buchstaben sehen aus wie echte Schrift, ergeben aber keinen Sinn oder enthalten Fehler.',
+        difficulty: 'Leicht erkennbar'
       },
       {
-        title: "Hintergrund & Details",
-        icon: "🔍",
-        content: "Schau dir den Hintergrund genau an: verschwimmen Objektränder unnatürlich? Gibt es wiederholende Muster? Sind Personen im Hintergrund verzerrt oder haben sie seltsame Proportionen?",
-        difficulty: "Mittel"
+        title: 'Hintergrund & Details',
+        content: 'Schau dir den Hintergrund genau an: verschwimmen Objektränder unnatürlich? Gibt es wiederholende Muster? Sind Personen im Hintergrund verzerrt oder haben sie seltsame Proportionen?',
+        difficulty: 'Mittel'
       },
       {
-        title: "Texturen & Materialien",
-        icon: "🧶",
-        content: "KI-Bilder haben oft eine zu glatte, makellose Textur. Echte Fotos zeigen natürliche Unregelmässigkeiten in Haut, Stoff, Holz oder anderen Materialien.",
-        difficulty: "Schwer"
+        title: 'Texturen & Materialien',
+        content: 'KI-Bilder haben oft eine zu glatte, makellose Textur. Echte Fotos zeigen natürliche Unregelmässigkeiten in Haut, Stoff, Holz oder anderen Materialien.',
+        difficulty: 'Schwer'
       },
       {
-        title: "Beleuchtung & Schatten",
-        icon: "💡",
-        content: "Achte auf die Lichtquelle: Kommen alle Schatten aus der gleichen Richtung? KI verwechselt manchmal Schattenwürfe oder erzeugt unmögliche Lichtverhältnisse.",
-        difficulty: "Schwer"
+        title: 'Beleuchtung & Schatten',
+        content: 'Achte auf die Lichtquelle: Kommen alle Schatten aus der gleichen Richtung? KI verwechselt manchmal Schattenwürfe oder erzeugt unmögliche Lichtverhältnisse.',
+        difficulty: 'Schwer'
       }
     ]
   },
   texts: {
-    title: "KI-Texte erkennen",
-    icon: "📝",
     sections: [
       {
-        title: "Zu perfekt & ausgewogen",
-        icon: "⚖️",
-        content: "KI-Texte präsentieren oft beide Seiten eines Arguments gleich stark, ohne eigene Position. «Einerseits... andererseits...» ist ein typisches Muster. Echte Menschen haben meist eine klare Meinung.",
-        difficulty: "Leicht erkennbar"
+        title: 'Zu perfekter Aufbau',
+        content: 'KI-Texte folgen oft einer auffällig symmetrischen Struktur. Achte auf "Von ... über ... bis hin zu"-Aufzählungen, perfekte Pro-Contra-Abwägungen und lehrbuchhafte Absätze.',
+        difficulty: 'Leicht erkennbar'
       },
       {
-        title: "Allgemeinplätze",
-        icon: "🌍",
-        content: "KI-Texte bleiben oft vage und allgemein. Sie verwenden Phrasen wie «vielfältige Herausforderungen», «enormes Potenzial» oder «von entscheidender Bedeutung», ohne konkrete Beispiele.",
-        difficulty: "Leicht erkennbar"
+        title: 'Allgemeine Floskeln',
+        content: 'Phrasen wie "in der heutigen schnelllebigen Welt", "von entscheidender Bedeutung" oder "Es ist wichtig zu beachten" sind typische KI-Formulierungen. Echte Autoren schreiben konkreter.',
+        difficulty: 'Leicht erkennbar'
       },
       {
-        title: "Übertriebene Adjektive",
-        icon: "✨",
-        content: "KI nutzt gerne Superlative und übertrieben positive Beschreibungen: «wunderschön», «atemberaubend», «einzigartig», «bemerkenswert». Echte Texte sind oft nüchterner.",
-        difficulty: "Mittel"
+        title: 'Fehlende Details',
+        content: 'KI-Texte vermeiden oft konkrete Namen, Zahlen, Daten oder Quellenangaben. Wenn ein Text sehr allgemein bleibt und keine spezifischen Informationen enthält, könnte er KI-generiert sein.',
+        difficulty: 'Mittel'
       },
       {
-        title: "Fehlende persönliche Note",
-        icon: "👤",
-        content: "KI-Texte klingen oft unpersönlich und steril. Echte Texte enthalten persönliche Erfahrungen, Emotionen, Humor oder auch Unsicherheit.",
-        difficulty: "Mittel"
+        title: 'Emotionale Flachheit',
+        content: 'KI-Texte wirken oft emotional distanziert. Echte persönliche Texte enthalten Unsicherheiten, Widersprüche und echte Emotionen – KI schreibt zu "ausgewogen" und "sachlich".',
+        difficulty: 'Mittel'
       },
       {
-        title: "Wiederholende Struktur",
-        icon: "🔄",
-        content: "KI neigt dazu, Sätze ähnlich zu strukturieren. Achte auf wiederholende Muster in der Satzlänge und im Aufbau.",
-        difficulty: "Schwer"
+        title: 'Übertrieben positiv',
+        content: 'KI neigt dazu, alles positiv darzustellen oder perfekt auszubalancieren. Wenn ein Text zu optimistisch klingt oder jedes Argument sofort entkräftet wird, könnte KI dahinterstecken.',
+        difficulty: 'Schwer'
       },
       {
-        title: "Fehlende Quellenangaben",
-        icon: "📚",
-        content: "Wenn ein angeblich faktenbasierter Text keine konkreten Quellen, Daten oder Studien nennt, könnte er KI-generiert sein. Echte Fachtexte verweisen auf Quellen.",
-        difficulty: "Mittel"
+        title: 'Dialekt & Slang',
+        content: 'Schweizerdeutsch, Umgangssprache und jugendlicher Slang sind für KI schwer nachzuahmen. Texte mit authentischem Dialekt oder natürlichen Tippfehlern sind meist von Menschen.',
+        difficulty: 'Leicht erkennbar'
       }
     ]
   },
   general: {
-    title: "Allgemeine Tipps",
-    icon: "🛡️",
     sections: [
       {
-        title: "Kritisch bleiben",
-        icon: "🧠",
-        content: "Der wichtigste Tipp: Hinterfrage alles, was du online siehst oder liest. Frage dich: Wer hat das erstellt? Warum? Gibt es eine Quelle?"
+        title: 'Quellenprüfung',
+        content: 'Überprüfe die Quelle des Inhalts. Seriöse Medien wie SRF, NZZ oder 20 Minuten haben Redaktionsprozesse. Unbekannte Accounts oder anonyme Beiträge sind verdächtiger.',
+        difficulty: 'Grundlegend'
       },
       {
-        title: "Reverse Image Search",
-        icon: "🔎",
-        content: "Nutze die Google-Bildersuche oder TinEye, um zu prüfen, ob ein Bild schon anderswo im Internet existiert. KI-Bilder haben normalerweise keine Quelle."
+        title: 'Kontext beachten',
+        content: 'Frage dich: Warum wurde dieser Inhalt erstellt? Wer profitiert davon? KI-generierte Inhalte werden oft für Desinformation, Werbung oder Manipulation eingesetzt.',
+        difficulty: 'Grundlegend'
       },
       {
-        title: "Metadaten prüfen",
-        icon: "📊",
-        content: "Echte Fotos haben EXIF-Daten (Kameramodell, Datum, Ort). KI-generierte Bilder haben diese Metadaten nicht. Online-Tools können dir helfen, diese zu prüfen."
+        title: 'Reverse Image Search',
+        content: 'Nutze die Google-Bildersuche oder TinEye, um zu prüfen, ob ein Bild bereits existiert. Bei KI-Bildern findest du kein Original, während echte Fotos oft andere Versionen haben.',
+        difficulty: 'Praktisch'
       },
       {
-        title: "KI-Detektoren",
-        icon: "🤖",
-        content: "Es gibt Online-Tools wie «AI or Not», «Hive Moderation» oder «GPTZero» (für Texte), die helfen können. Aber Vorsicht: Kein Detektor ist 100% zuverlässig!"
+        title: 'KI-Detektoren nutzen',
+        content: 'Tools wie AI or Not, Hive Moderation oder GPTZero können helfen, KI-Inhalte zu erkennen. Sie sind aber nicht fehlerfrei – nutze sie als zusätzliche Hilfe, nicht als Beweis.',
+        difficulty: 'Praktisch'
+      },
+      {
+        title: 'Kritisch hinterfragen',
+        content: 'Die wichtigste Kompetenz ist kritisches Denken. Glaube nicht alles, was du siehst oder liest. Frage dich bei jedem Inhalt: Könnte das gefälscht sein? Was spricht dafür, was dagegen?',
+        difficulty: 'Grundlegend'
+      },
+      {
+        title: 'Aktualität prüfen',
+        content: 'Achte auf Zeitangaben und aktuelle Bezüge. KI-Texte können veraltete Informationen enthalten oder zeitlose Aussagen machen, um über fehlende Aktualität hinwegzutäuschen.',
+        difficulty: 'Mittel'
       }
     ]
   }
 };
 
-// ============================================================
-// AUSWERTUNGS-STUFEN
-// ============================================================
-
+// --- ERGEBNIS-STUFEN ---
 const RESULT_LEVELS = [
   {
     minPercent: 90,
-    title: "🏆 KI-Profi!",
-    color: "#7a9a01",
-    description: "Hervorragend! Du erkennst KI-generierte Inhalte sehr zuverlässig. Du bist bestens gewappnet für die digitale Welt.",
-    advice: "Teile dein Wissen mit anderen und bleibe weiterhin aufmerksam – KI wird ständig besser!"
+    title: 'KI-Profi',
+    description: 'Hervorragend! Du erkennst KI-Inhalte sehr zuverlässig und bist bestens gegen Manipulation geschützt.',
+    advice: 'Teile dein Wissen mit anderen und hilf Mitschülerinnen und Mitschülern, KI-Inhalte zu erkennen.',
+    color: '#4caf50'
   },
   {
     minPercent: 70,
-    title: "👍 Aufmerksam",
-    color: "#4a90d9",
-    description: "Gut gemacht! Du erkennst die meisten KI-Inhalte. Bei einigen Bildern/Texten gibt es noch Verbesserungspotenzial.",
-    advice: "Achte besonders auf die Kategorien, in denen du Fehler gemacht hast. Die Tipps helfen dir, dich zu verbessern."
+    title: 'Guter Blick',
+    description: 'Gut gemacht! Du erkennst die meisten KI-Inhalte. Mit etwas Übung wirst du noch besser.',
+    advice: 'Schau dir die Tipps-Sektion an, um dein Wissen weiter zu vertiefen.',
+    color: '#96B967'
   },
   {
     minPercent: 50,
-    title: "⚠️ Vorsicht",
-    color: "#f0a500",
-    description: "Du erkennst ungefähr die Hälfte der KI-Inhalte. Da ist noch Luft nach oben!",
-    advice: "Schau dir die Tipps & Tricks genau an und versuche es nochmal. Mit Übung wirst du besser!"
+    title: 'Auf dem Weg',
+    description: 'Du hast ein Grundverständnis, aber es gibt noch Verbesserungspotenzial.',
+    advice: 'Übe regelmässig und achte besonders auf die typischen KI-Merkmale in den Tipps.',
+    color: '#ff9800'
   },
   {
     minPercent: 0,
-    title: "🚨 Gefährdet",
-    color: "#e6007e",
-    description: "Du tust dich noch schwer, KI-generierte Inhalte zu erkennen. Das ist keine Schande – aber es ist wichtig, daran zu arbeiten!",
-    advice: "Lies dir die Tipps & Tricks aufmerksam durch und versuche das Quiz nochmal. Jeder Durchgang hilft dir, besser zu werden!"
+    title: 'Übung nötig',
+    description: 'Da ist noch Luft nach oben. Keine Sorge – mit den richtigen Tipps wirst du besser!',
+    advice: 'Lies dir die Tipps & Tricks durch und versuche das Quiz danach nochmal.',
+    color: '#E01272'
   }
 ];
