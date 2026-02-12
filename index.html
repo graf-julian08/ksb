@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echt oder KI? – Kantonsschule am Brühl St.Gallen</title>
+  <meta name="description"
+    content="Lerne, KI-generierte Bilder und Texte von echten zu unterscheiden. Ein interaktives Quiz der Kantonsschule am Brühl St.Gallen.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <a href="index.html" class="site-title">Kanti am Brühl St.Gallen</a>
+    <nav class="header-nav">
+      <button class="nav-btn active" data-tab="image-quiz" id="nav-image-quiz">bilder</button>
+      <button class="nav-btn" data-tab="text-quiz" id="nav-text-quiz">texte</button>
+      <button class="nav-btn" data-tab="tips" id="nav-tips">tipps</button>
+    </nav>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main>
+
+    <!-- ========== BILDER-QUIZ TAB ========== -->
+    <section class="tab-content active" id="tab-image-quiz">
+
+      <!-- Start Screen -->
+      <div class="quiz-start" id="image-quiz-start">
+        <div class="quiz-hero">
+          <div class="quiz-hero-text">
+            <h1>Erkennst du<br><em>KI-Bilder?</em></h1>
+            <p>15 Bilder. Echt oder KI-generiert? Teste dein Auge und lerne, worauf du achten musst.</p>
+            <div class="quiz-features">
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>15 Fragen</span>
+              </div>
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>Sofortiges Feedback</span>
+              </div>
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>Detaillierte Auswertung</span>
+              </div>
+            </div>
+            <button class="btn-start-quiz" id="image-quiz-start-btn">quiz starten</button>
+          </div>
+          <div class="quiz-hero-visual">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="AI vs Real">
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Screen -->
+      <div class="quiz-game" id="image-quiz-game">
+        <div class="quiz-topbar">
+          <span class="quiz-progress-text" id="image-progress">1 / 15</span>
+          <div class="quiz-score-bar">
+            <div class="quiz-score-item">
+              <span class="label">Richtig</span>
+              <span class="value" id="image-correct-count">0</span>
+            </div>
+            <div class="quiz-score-item" id="image-streak-display">
+              <span class="label">Serie</span>
+              <span class="value" id="image-streak-count">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="image-progress-bar" style="width: 0%"></div>
+        </div>
+
+        <div class="quiz-image-container" id="image-display-container">
+          <div class="image-loader" id="image-loader">Bild wird geladen...</div>
+          <img src="" alt="Quiz-Bild" id="image-display" style="display:none;">
+        </div>
+
+        <div class="quiz-actions" id="image-actions">
+          <button class="btn-answer btn-answer-real" id="btn-real" onclick="handleImageAnswer('real')">echtes
+            foto</button>
+          <button class="btn-answer btn-answer-ai" id="btn-ai" onclick="handleImageAnswer('ai')">ki-generiert</button>
+        </div>
+
+        <div class="quiz-feedback" id="image-feedback">
+          <div class="feedback-header">
+            <div class="feedback-icon" id="image-feedback-icon"></div>
+            <span class="feedback-title" id="image-feedback-title"></span>
+          </div>
+          <p class="feedback-explanation" id="image-feedback-text"></p>
+          <button class="btn-next" id="image-next-btn" onclick="nextImageQuestion()">weiter</button>
+        </div>
+      </div>
+
+      <!-- Results Screen -->
+      <div class="quiz-results" id="image-quiz-results">
+        <div class="results-hero">
+          <div class="results-level" id="image-results-level"></div>
+          <div class="results-percentage" id="image-results-percent"></div>
+          <p class="results-description" id="image-results-desc"></p>
+          <p class="results-advice" id="image-results-advice"></p>
+        </div>
+        <div class="results-stats" id="image-results-stats"></div>
+        <div class="results-details" id="image-results-details">
+          <h2>Deine Antworten</h2>
+          <div id="image-results-list"></div>
+        </div>
+        <div class="results-actions">
+          <button class="btn-restart" onclick="restartImageQuiz()">nochmal spielen</button>
+          <button class="btn-tips" onclick="switchTab('tips')">tipps ansehen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TEXT-QUIZ TAB ========== -->
+    <section class="tab-content" id="tab-text-quiz">
+
+      <!-- Start Screen -->
+      <div class="quiz-start" id="text-quiz-start">
+        <div class="quiz-hero">
+          <div class="quiz-hero-text">
+            <h1>Erkennst du<br><em>KI-Texte?</em></h1>
+            <p>10 Texte. Mensch oder Maschine? Trainiere dein Sprachgefühl und erkenne die Unterschiede.</p>
+            <div class="quiz-features">
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>10 Fragen</span>
+              </div>
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>Sofortiges Feedback</span>
+              </div>
+              <div class="quiz-feature">
+                <span class="feature-dot"></span>
+                <span>Detaillierte Auswertung</span>
+              </div>
+            </div>
+            <button class="btn-start-quiz" onclick="startTextQuiz()" id="text-quiz-start-btn">quiz starten</button>
+          </div>
+          <div class="quiz-hero-visual"
+            style="background: var(--ksb-magenta); color: #fff; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.05; padding: 40px;">
+            Mensch<br>oder<br>Maschine?
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Screen -->
+      <div class="quiz-game" id="text-quiz-game">
+        <div class="quiz-topbar">
+          <span class="quiz-progress-text" id="text-progress">1 / 10</span>
+          <div class="quiz-score-bar">
+            <div class="quiz-score-item">
+              <span class="label">Richtig</span>
+              <span class="value" id="text-correct-count">0</span>
+            </div>
+            <div class="quiz-score-item" id="text-streak-display">
+              <span class="label">Serie</span>
+              <span class="value" id="text-streak-count">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="text-progress-bar" style="width: 0%"></div>
+        </div>
+
+        <div class="quiz-text-container">
+          <div class="quiz-text-content" id="text-display"></div>
+          <div class="quiz-text-meta" id="text-meta"></div>
+        </div>
+
+        <div class="quiz-actions" id="text-actions">
+          <button class="btn-answer btn-answer-real" id="btn-human" onclick="handleTextAnswer('real')">von
+            mensch</button>
+          <button class="btn-answer btn-answer-ai" id="btn-ai-text"
+            onclick="handleTextAnswer('ai')">ki-generiert</button>
+        </div>
+
+        <div class="quiz-feedback" id="text-feedback">
+          <div class="feedback-header">
+            <div class="feedback-icon" id="text-feedback-icon"></div>
+            <span class="feedback-title" id="text-feedback-title"></span>
+          </div>
+          <p class="feedback-explanation" id="text-feedback-text"></p>
+          <button class="btn-next" id="text-next-btn" onclick="nextTextQuestion()">weiter</button>
+        </div>
+      </div>
+
+      <!-- Results Screen -->
+      <div class="quiz-results" id="text-quiz-results">
+        <div class="results-hero">
+          <div class="results-level" id="text-results-level"></div>
+          <div class="results-percentage" id="text-results-percent"></div>
+          <p class="results-description" id="text-results-desc"></p>
+          <p class="results-advice" id="text-results-advice"></p>
+        </div>
+        <div class="results-stats" id="text-results-stats"></div>
+        <div class="results-details" id="text-results-details">
+          <h2>Deine Antworten</h2>
+          <div id="text-results-list"></div>
+        </div>
+        <div class="results-actions">
+          <button class="btn-restart" onclick="restartTextQuiz()">nochmal spielen</button>
+          <button class="btn-tips" onclick="switchTab('tips')">tipps ansehen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TIPPS TAB ========== -->
+    <section class="tab-content" id="tab-tips">
+      <div class="tips-section">
+        <div class="tips-header">
+          <h1>Tipps &amp; <em>Tricks</em></h1>
+          <p>Lerne, wie du KI-generierte Inhalte erkennst und dich vor Manipulation schützt.</p>
+        </div>
+        <div class="tips-tabs">
+          <button class="tips-tab-btn active" data-tips="images" onclick="switchTipsTab('images')">bilder</button>
+          <button class="tips-tab-btn" data-tips="texts" onclick="switchTipsTab('texts')">texte</button>
+          <button class="tips-tab-btn" data-tips="general" onclick="switchTipsTab('general')">allgemein</button>
+        </div>
+        <div class="tips-content active" id="tips-images"></div>
+        <div class="tips-content" id="tips-texts"></div>
+        <div class="tips-content" id="tips-general"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <span class="footer-brand-line1">Kanton St.Gallen</span>
+      <span class="footer-brand-line2">Kantonsschule am Brühl</span>
+      <span class="footer-brand-line3">St.Gallen</span>
+    </div>
+    <div class="footer-contact">
+      Kantonsschule am Brühl<br>
+      Notkerstrasse 20<br>
+      9000 St.Gallen
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">schliessen</button>
+    <img src="" alt="Vergrössertes Bild" id="lightbox-img">
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/image-quiz.js"></script>
+  <script src="js/text-quiz.js"></script>
+</body>
+
+</html>

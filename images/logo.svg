@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- KSB Logo - 3D Cube -->
+  <!-- Top face (Magenta) -->
+  <polygon points="100,20 170,60 100,100 30,60" fill="#e6007e"/>
+  <!-- Left face (Green) -->
+  <polygon points="30,60 100,100 100,170 30,130" fill="#7a9a01"/>
+  <!-- Right face (Gray) -->
+  <polygon points="100,100 170,60 170,130 100,170" fill="#8c8c8c"/>
+</svg>
