@@ -50,7 +50,7 @@ function showImageQuestion() {
 
     // Reset UI
     document.getElementById('image-feedback').classList.remove('active');
-    document.getElementById('image-actions').style.display = 'flex';
+    document.getElementById('image-actions').style.display = ''; // Let CSS (grid) handle it
     document.getElementById('btn-real').disabled = false;
     document.getElementById('btn-ai').disabled = false;
 

@@ -38,7 +38,7 @@ function showTextQuestion() {
 
     // Reset UI
     document.getElementById('text-feedback').classList.remove('active');
-    document.getElementById('text-actions').style.display = 'flex';
+    document.getElementById('text-actions').style.display = ''; // Let CSS (grid) handle it
     document.getElementById('btn-human').disabled = false;
     document.getElementById('btn-ai-text').disabled = false;
 

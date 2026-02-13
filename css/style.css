@@ -475,7 +475,22 @@ main {
 @media (max-width: 500px) {
   .quiz-actions {
     grid-template-columns: 1fr;
-    padding: 20px var(--spacing-mobile);
+    padding: 10px var(--spacing-mobile);
+    /* Reduced container padding */
+    gap: 12px;
+    /* Tighter gap */
+  }
+
+  .btn-answer {
+    padding: 16px;
+    /* Reduced internal padding from 24px */
+    font-size: 1rem;
+    /* Slightly smaller text */
+    min-height: 60px;
+    /* Ensure good touch target but not huge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
