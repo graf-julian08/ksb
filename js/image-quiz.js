@@ -122,17 +122,21 @@ function handleImageAnswer(answer) {
 
     // Auto-scroll to feedback
     setTimeout(() => {
-        feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
 }
 
 // --- Next Question ---
 function nextImageQuestion() {
     imageQuizIndex++;
-    if (imageQuizIndex >= IMAGE_QUIZ_COUNT) {
-        showImageResults();
-    } else {
+    if (imageQuizIndex < imageQuizQuestions.length) {
         showImageQuestion();
+        // Scroll to top for better UX
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    } else {
+        showImageResults();
+        // Scroll to top for results
+        window.scrollTo({ top: 0, behavior: 'auto' });
     }
 }
 
