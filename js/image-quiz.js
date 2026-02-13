@@ -76,12 +76,6 @@ function showImageQuestion() {
 
     // Lightbox click
     imgEl.onclick = () => openLightbox(q.src);
-
-    console.log('Current Question:', {
-        src: q.src,
-        type: q.type,
-        explanation: q.explanation
-    });
 }
 
 // --- Handle Answer ---

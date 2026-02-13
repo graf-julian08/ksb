@@ -14,8 +14,8 @@ const IMAGE_QUIZ_DATA = [
   },
   {
     type: 'real',
-    src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900&q=80',
-    explanation: 'Dieses Porträt ist echt. Echte Gesichter zeigen natürliche Asymmetrie, kleine Hautunregelmässigkeiten und authentische Reflexionen in den Augen.',
+    src: 'https://images.unsplash.com/photo-1534954553104-88cb75be7648?fm=jpg&q=80&w=900&auto=format&fit=crop',
+    explanation: 'Dieses Schwarz-Weiss-Porträt ist echt. Die extrem detaillierte Hautstruktur mit tiefen Falten und Poren ist in dieser natürlichen Komplexität für KI sehr schwer konsistent darzustellen.',
     category: 'Porträt',
     difficulty: 2
   },
@@ -56,8 +56,8 @@ const IMAGE_QUIZ_DATA = [
   },
   {
     type: 'real',
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80',
-    explanation: 'Dieses Porträt ist echt. Natürliche Hautporen, asymmetrische Gesichtszüge und authentische Beleuchtung sind schwer für KI nachzuahmen.',
+    src: 'https://images.unsplash.com/photo-1552158732-06dc1d835de0?fm=jpg&q=80&w=900&auto=format&fit=crop',
+    explanation: 'Dieses Porträt ist echt. Der intensive Blick und die ungeschönte Hauttextur mit sichtbaren Poren, Bartstoppeln und Unreinheiten zeigen die Echtheit. KI neigt dazu, Haut untypisch weichzuzeichnen.',
     category: 'Porträt',
     difficulty: 2
   },
@@ -84,8 +84,8 @@ const IMAGE_QUIZ_DATA = [
   },
   {
     type: 'real',
-    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&q=80',
-    explanation: 'Dieses Porträt ist echt. Authentische Hautstruktur, natürliche Haarsträhnen und echte Emotionen sind schwer zu fälschen.',
+    src: 'https://images.unsplash.com/photo-1749823029842-83962bc893bf?fm=jpg&q=80&w=900&auto=format&fit=crop',
+    explanation: 'Diese Aufnahme ist echt. Die natürliche Beleuchtung, der authentische, nicht inszenierte Ausdruck und die realistischen Hauttöne wirken organisch und lebendig.',
     category: 'Porträt',
     difficulty: 2
   },
