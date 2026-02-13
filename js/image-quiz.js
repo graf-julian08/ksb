@@ -76,6 +76,12 @@ function showImageQuestion() {
 
     // Lightbox click
     imgEl.onclick = () => openLightbox(q.src);
+
+    console.log('Current Question:', {
+        src: q.src,
+        type: q.type,
+        explanation: q.explanation
+    });
 }
 
 // --- Handle Answer ---
@@ -119,6 +125,11 @@ function handleImageAnswer(answer) {
     text.textContent = q.explanation;
 
     feedback.classList.add('active');
+
+    // Auto-scroll to feedback
+    setTimeout(() => {
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 }
 
 // --- Next Question ---

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>KSB Quiz Image Audit</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card.error {
+            border: 4px solid red;
+        }
+
+        .label {
+            font-weight: bold;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .real {
+            color: green;
+        }
+
+        .ai {
+            color: magenta;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Audit: Alle Bilder</h1>
+    <div class="grid" id="grid"></div>
+    <script src="js/data.js"></script>
+    <script>
+        const grid = document.getElementById('grid');
+        IMAGE_QUIZ_DATA.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'card';
+
+            // Check for mismatch
+            const isAiSrc = item.src.includes('images/ai/');
+            const mismatch = (item.type === 'ai' && !isAiSrc) || (item.type === 'real' && isAiSrc);
+            if (mismatch) div.classList.add('error');
+
+            div.innerHTML = `
+                <img src="${item.src}" loading="lazy">
+                <span class="label ${item.type}">${item.type.toUpperCase()}</span>
+                <small>${item.category}</small><br>
+                <small style="font-size: 10px">${item.src}</small>
+                ${mismatch ? '<br><strong style="color:red">MISMATCH!</strong>' : ''}
+            `;
+            grid.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>

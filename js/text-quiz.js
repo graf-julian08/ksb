@@ -97,6 +97,11 @@ function handleTextAnswer(answer) {
     text.textContent = q.explanation;
 
     feedback.classList.add('active');
+
+    // Auto-scroll to feedback
+    setTimeout(() => {
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 }
 
 // --- Next Question ---
