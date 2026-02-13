@@ -1202,3 +1202,22 @@ main {
     font-size: 2rem;
   }
 }
+
+@media (max-width: 360px) {
+  .site-title {
+    font-size: 0.9rem;
+  }
+
+  .nav-btn {
+    font-size: 0.75rem;
+    padding: 6px 14px;
+  }
+
+  .quiz-hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .tips-header h1 {
+    font-size: 2rem;
+  }
+}
