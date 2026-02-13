@@ -153,6 +153,9 @@ main {
 /* ============================================================
    QUIZ START – Swiss Style Grid
    ============================================================ */
+/* ============================================================
+   QUIZ START – Swiss Style Grid
+   ============================================================ */
 .quiz-start {
   display: block;
   flex: 1;
@@ -162,85 +165,104 @@ main {
   display: none;
 }
 
+/* Default mobile/tablet layout (vertical stack) */
 .quiz-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh - var(--header-height));
-  align-items: stretch;
-}
-
-@media (max-width: 900px) {
-  .quiz-hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    display: flex;
-    flex-direction: column-reverse;
-    /* Text on top visually, but image first in markup? No, keep logic simple */
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column-reverse;
+  /* Image top (visually), text bottom? No, keep standard flow */
+  flex-direction: column;
+  min-height: auto;
 }
 
 .quiz-hero-text {
+  padding: 40px var(--spacing-mobile);
+  background: var(--ksb-bg);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px var(--spacing-container);
-  background: var(--ksb-bg);
 }
 
-@media (max-width: 768px) {
+.quiz-hero-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--ksb-bg-light);
+  min-height: 300px;
+  /* Ensure visual is visible on mobile */
+}
+
+.quiz-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+/* Desktop Split Layout (Strict KSB Style) */
+@media (min-width: 900px) {
+  .quiz-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100vh - var(--header-height));
+    /* Full height minus header */
+    min-height: 600px;
+  }
+
   .quiz-hero-text {
-    padding: 40px var(--spacing-mobile);
+    padding: 80px var(--spacing-container);
+    align-items: flex-start;
+    /* Left align everything */
+  }
+
+  /* Typography Refinements for Desktop */
+  .quiz-hero-text h1 {
+    font-size: 5rem;
+    /* Large, bold Swiss type */
+    margin-bottom: 32px;
+  }
+
+  .quiz-hero-text p {
+    font-size: 1.25rem;
+    max-width: 500px;
+  }
+
+  .quiz-hero-visual {
+    height: 100%;
+    /* Fill grid cell */
+    min-height: auto;
   }
 }
 
-.quiz-hero-text h1 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
-  /* Slightly lighter than 800 for modern feel */
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  color: var(--ksb-text);
-  margin-bottom: 24px;
-}
-
-.quiz-hero-text h1 em {
-  color: var(--ksb-magenta);
-  font-style: italic;
-}
-
-.quiz-hero-text>p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--ksb-text-light);
-  /* Darker gray for better readability */
-  max-width: 540px;
-  margin-bottom: 48px;
-}
-
-.quiz-features {
+/* Typographic Visual for Text Quiz (Mensch oder Maschine) */
+.type-visual {
+  background: var(--ksb-magenta);
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px 32px;
-  margin-bottom: 56px;
-}
-
-.quiz-feature {
-  display: flex;
+  /* Center content */
   align-items: center;
-  gap: 12px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ksb-text);
+  justify-content: center;
+  padding: 40px;
 }
 
-.feature-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--ksb-green);
-  border-radius: 0;
-  /* Square for Swiss style */
+.type-content {
+  color: #fff;
+  font-family: var(--font-main);
+  font-weight: 700;
+  /* Bold */
+  font-size: clamp(3rem, 6vw, 6rem);
+  /* Responsive but huge */
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; or center? Screenshot looks left-aligned block */
+  align-items: flex-start;
 }
+
+.type-content span {
+  display: block;
+}
+
+/* --- BUTTON REFINEMENTS (Flat Swiss Style, No Glow) --- */
 
 .btn-start-quiz {
   font-family: var(--font-main);
@@ -251,38 +273,28 @@ main {
   color: #fff;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
+  transition: background 0.2s;
+  /* Only color transition */
   align-self: flex-start;
-  /* Removed text-transform layer */
+  margin-top: auto;
+  /* Push to bottom if needed, or just normal flow */
 }
 
 .btn-start-quiz:hover {
   background: var(--ksb-green-dark);
-  transform: translateY(-2px);
+  transform: none;
+  /* NO MOVEMENT */
+  box-shadow: none;
+  /* NO GLOW/SHADOW */
 }
 
 @media (max-width: 768px) {
   .btn-start-quiz {
     width: 100%;
-    text-align: center;
+    margin-top: 32px;
   }
 }
 
-.quiz-hero-visual {
-  position: relative;
-  overflow: hidden;
-  background: var(--ksb-bg-light);
-  min-height: 400px;
-}
-
-/* Make image cover completely */
-.quiz-hero-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  inset: 0;
-}
 
 /* ============================================================
    QUIZ GAME – Playing State
@@ -522,8 +534,10 @@ main {
 .btn-answer-real:hover:not(:disabled) {
   background: var(--ksb-green);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(150, 185, 103, 0.3);
+  transform: none;
+  /* NO MOVEMENT */
+  box-shadow: none;
+  /* NO SHADOW */
 }
 
 .btn-answer-ai {
@@ -534,8 +548,10 @@ main {
 .btn-answer-ai:hover:not(:disabled) {
   background: var(--ksb-magenta);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(224, 18, 114, 0.3);
+  transform: none;
+  /* NO MOVEMENT */
+  box-shadow: none;
+  /* NO SHADOW */
 }
 
 /* Feedback panel */
