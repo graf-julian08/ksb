@@ -98,9 +98,9 @@ function handleTextAnswer(answer) {
 
     feedback.classList.add('active');
 
-    // Auto-scroll to feedback
+    // Auto-scroll to feedback (with offset)
     setTimeout(() => {
-        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        scrollToFeedback('text-feedback');
     }, 100);
 }
 
@@ -109,12 +109,12 @@ function nextTextQuestion() {
     textQuizIndex++;
     if (textQuizIndex >= TEXT_QUIZ_COUNT) {
         showTextResults();
-        // Scroll to top for results
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        // Robust Scroll to top
+        scrollToTop();
     } else {
         showTextQuestion();
-        // Scroll to top for better UX
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        // Robust Scroll to top
+        scrollToTop();
     }
 }
 

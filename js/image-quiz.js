@@ -120,9 +120,9 @@ function handleImageAnswer(answer) {
 
     feedback.classList.add('active');
 
-    // Auto-scroll to feedback
+    // Auto-scroll to feedback (with offset)
     setTimeout(() => {
-        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        scrollToFeedback('image-feedback');
     }, 100);
 }
 
@@ -131,12 +131,12 @@ function nextImageQuestion() {
     imageQuizIndex++;
     if (imageQuizIndex < imageQuizQuestions.length) {
         showImageQuestion();
-        // Scroll to top for better UX
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        // Robust Scroll to top
+        scrollToTop();
     } else {
         showImageResults();
-        // Scroll to top for results
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        // Robust Scroll to top
+        scrollToTop();
     }
 }
 

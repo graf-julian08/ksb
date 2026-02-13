@@ -52,6 +52,42 @@ function switchTipsTab(key) {
   document.getElementById('tips-' + key).classList.add('active');
 }
 
+/**
+ * Robust scroll to top function
+ * Uses a small timeout to ensure layout shifts are finished
+ */
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  // Double check for mobile browsers
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, 50);
+}
+
+/**
+ * Scroll to element with header offset
+ * @param {string} elementId - ID of element to scroll to
+ */
+function scrollToFeedback(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  // Mobile adjustment: Scroll to the actions container (buttons) instead of feedback
+  // This keeps the user's context better
+  const actionsId = elementId.includes('image') ? 'image-actions' : 'text-actions';
+  const actionsEl = document.getElementById(actionsId);
+
+  const target = actionsEl || el;
+  const headerOffset = 90; // buffer for sticky header (70px) + gap
+  const elementPosition = target.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth'
+  });
+}
+
 // --- Lightbox ---
 function openLightbox(src) {
   const overlay = document.getElementById('lightbox');
