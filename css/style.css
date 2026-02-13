@@ -1042,32 +1042,6 @@ main {
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
 }
 
-max-width: 95%;
-max-height: 90vh;
-object-fit: contain;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  font-family: var(--font-main);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: lowercase;
-  padding: 10px 24px;
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-.lightbox-close:hover {
-  background: #fff;
-  color: #000;
-}
-
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -1078,10 +1052,20 @@ object-fit: contain;
 
   .quiz-hero {
     grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
   .quiz-hero-visual {
     max-height: 50vh;
+    min-height: 300px;
+    position: relative;
+  }
+
+  .quiz-hero-visual img {
+    position: relative;
+    height: 100%;
+    width: 100%;
   }
 
   .quiz-hero-text {
@@ -1095,15 +1079,18 @@ object-fit: contain;
 
   .quiz-topbar {
     padding: 16px 20px 8px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .quiz-actions {
     padding: 24px 20px;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .btn-answer {
     min-width: 100%;
+    /* Full width buttons on mobile */
   }
 
   .quiz-feedback {

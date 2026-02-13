@@ -16,9 +16,9 @@
   <header class="site-header">
     <a href="index.html" class="site-title">Kanti am Brühl St.Gallen</a>
     <nav class="header-nav">
-      <button class="nav-btn active" data-tab="image-quiz" id="nav-image-quiz">bilder</button>
-      <button class="nav-btn" data-tab="text-quiz" id="nav-text-quiz">texte</button>
-      <button class="nav-btn" data-tab="tips" id="nav-tips">tipps</button>
+      <button class="nav-btn active" data-tab="image-quiz" id="nav-image-quiz">Bilder</button>
+      <button class="nav-btn" data-tab="text-quiz" id="nav-text-quiz">Texte</button>
+      <button class="nav-btn" data-tab="tips" id="nav-tips">Tipps</button>
     </nav>
   </header>
 
@@ -48,7 +48,7 @@
                 <span>Detaillierte Auswertung</span>
               </div>
             </div>
-            <button class="btn-start-quiz" id="image-quiz-start-btn">quiz starten</button>
+            <button class="btn-start-quiz" id="image-quiz-start-btn">Quiz starten</button>
           </div>
           <div class="quiz-hero-visual">
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80" alt="AI vs Real">
@@ -81,9 +81,9 @@
         </div>
 
         <div class="quiz-actions" id="image-actions">
-          <button class="btn-answer btn-answer-real" id="btn-real" onclick="handleImageAnswer('real')">echtes
-            foto</button>
-          <button class="btn-answer btn-answer-ai" id="btn-ai" onclick="handleImageAnswer('ai')">ki-generiert</button>
+          <button class="btn-answer btn-answer-real" id="btn-real" onclick="handleImageAnswer('real')">Echtes
+            Foto</button>
+          <button class="btn-answer btn-answer-ai" id="btn-ai" onclick="handleImageAnswer('ai')">KI-generiert</button>
         </div>
 
         <div class="quiz-feedback" id="image-feedback">
@@ -92,7 +92,7 @@
             <span class="feedback-title" id="image-feedback-title"></span>
           </div>
           <p class="feedback-explanation" id="image-feedback-text"></p>
-          <button class="btn-next" id="image-next-btn" onclick="nextImageQuestion()">weiter</button>
+          <button class="btn-next" id="image-next-btn" onclick="nextImageQuestion()">Weiter</button>
         </div>
       </div>
 
@@ -110,8 +110,8 @@
           <div id="image-results-list"></div>
         </div>
         <div class="results-actions">
-          <button class="btn-restart" onclick="restartImageQuiz()">nochmal spielen</button>
-          <button class="btn-tips" onclick="switchTab('tips')">tipps ansehen</button>
+          <button class="btn-restart" onclick="restartImageQuiz()">Nochmal spielen</button>
+          <button class="btn-tips" onclick="switchTab('tips')">Tipps ansehen</button>
         </div>
       </div>
     </section>
@@ -139,7 +139,7 @@
                 <span>Detaillierte Auswertung</span>
               </div>
             </div>
-            <button class="btn-start-quiz" onclick="startTextQuiz()" id="text-quiz-start-btn">quiz starten</button>
+            <button class="btn-start-quiz" onclick="startTextQuiz()" id="text-quiz-start-btn">Quiz starten</button>
           </div>
           <div class="quiz-hero-visual"
             style="background: var(--ksb-magenta); color: #fff; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1.05; padding: 40px;">
@@ -173,10 +173,10 @@
         </div>
 
         <div class="quiz-actions" id="text-actions">
-          <button class="btn-answer btn-answer-real" id="btn-human" onclick="handleTextAnswer('real')">von
-            mensch</button>
+          <button class="btn-answer btn-answer-real" id="btn-human" onclick="handleTextAnswer('real')">Von
+            Mensch</button>
           <button class="btn-answer btn-answer-ai" id="btn-ai-text"
-            onclick="handleTextAnswer('ai')">ki-generiert</button>
+            onclick="handleTextAnswer('ai')">KI-generiert</button>
         </div>
 
         <div class="quiz-feedback" id="text-feedback">
@@ -185,7 +185,7 @@
             <span class="feedback-title" id="text-feedback-title"></span>
           </div>
           <p class="feedback-explanation" id="text-feedback-text"></p>
-          <button class="btn-next" id="text-next-btn" onclick="nextTextQuestion()">weiter</button>
+          <button class="btn-next" id="text-next-btn" onclick="nextTextQuestion()">Weiter</button>
         </div>
       </div>
 
@@ -203,8 +203,8 @@
           <div id="text-results-list"></div>
         </div>
         <div class="results-actions">
-          <button class="btn-restart" onclick="restartTextQuiz()">nochmal spielen</button>
-          <button class="btn-tips" onclick="switchTab('tips')">tipps ansehen</button>
+          <button class="btn-restart" onclick="restartTextQuiz()">Nochmal spielen</button>
+          <button class="btn-tips" onclick="switchTab('tips')">Tipps ansehen</button>
         </div>
       </div>
     </section>
@@ -217,9 +217,9 @@
           <p>Lerne, wie du KI-generierte Inhalte erkennst und dich vor Manipulation schützt.</p>
         </div>
         <div class="tips-tabs">
-          <button class="tips-tab-btn active" data-tips="images" onclick="switchTipsTab('images')">bilder</button>
-          <button class="tips-tab-btn" data-tips="texts" onclick="switchTipsTab('texts')">texte</button>
-          <button class="tips-tab-btn" data-tips="general" onclick="switchTipsTab('general')">allgemein</button>
+          <button class="tips-tab-btn active" data-tips="images" onclick="switchTipsTab('images')">Bilder</button>
+          <button class="tips-tab-btn" data-tips="texts" onclick="switchTipsTab('texts')">Texte</button>
+          <button class="tips-tab-btn" data-tips="general" onclick="switchTipsTab('general')">Allgemein</button>
         </div>
         <div class="tips-content active" id="tips-images"></div>
         <div class="tips-content" id="tips-texts"></div>
@@ -245,7 +245,7 @@
 
   <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
-    <button class="lightbox-close" onclick="closeLightbox()">schliessen</button>
+    <button class="lightbox-close" onclick="closeLightbox()">Schliessen</button>
     <img src="" alt="Vergrössertes Bild" id="lightbox-img">
   </div>
 
