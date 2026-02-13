@@ -70,7 +70,14 @@ function showImageQuestion() {
         loader.classList.add('hidden');
     };
     img.onerror = () => {
-        loader.textContent = 'Bild konnte nicht geladen werden.';
+        console.error('Failed to load image:', q.src);
+        // Fallback to a safe internal image or a reliable Unsplash placeholder
+        imgEl.src = 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=900&q=80'; // Gradient placeholder
+        imgEl.style.display = 'block';
+        loader.classList.add('hidden');
+
+        // Add a visible error note only if really needed, otherwise fail gracefully
+        // loader.textContent = 'Bild konnte nicht geladen werden.'; // Old behavior
     };
     img.src = q.src;
 

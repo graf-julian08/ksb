@@ -126,7 +126,7 @@ const IMAGE_QUIZ_DATA = [
   },
   {
     type: 'real',
-    src: 'https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=900&q=80',
     explanation: 'Dieses Strassenfoto ist echt. Die authentischen Schatten, natürliche Bewegungsunschärfe und die korrekte Perspektive bestätigen die Echtheit.',
     category: 'Stadt',
     difficulty: 2
