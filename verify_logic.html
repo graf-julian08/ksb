@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logic Verification</title>
+</head>
+
+<body>
+    <h1>Logic Verification</h1>
+    <div id="results"></div>
+
+    <script src="js/data.js"></script>
+    <script>
+        const resultsDiv = document.getElementById('results');
+        const log = (msg, type = 'info') => {
+            const div = document.createElement('div');
+            div.textContent = msg;
+            div.style.color = type === 'error' ? 'red' : (type === 'success' ? 'green' : 'black');
+            resultsDiv.appendChild(div);
+            console.log(msg);
+        };
+
+        function verifyData() {
+            log('Starting verification...', 'info');
+            let errors = 0;
+
+            // 1. Verify Image Quiz Data
+            if (!window.IMAGE_QUIZ_DATA || !Array.isArray(window.IMAGE_QUIZ_DATA)) {
+                log('CRITICAL: IMAGE_QUIZ_DATA is missing or not an array', 'error');
+                errors++;
+            } else {
+                log(`found ${IMAGE_QUIZ_DATA.length} image questions.`);
+                IMAGE_QUIZ_DATA.forEach((item, index) => {
+                    if (!['real', 'ai'].includes(item.type)) {
+                        log(`Image Q${index}: Invalid type '${item.type}'`, 'error');
+                        errors++;
+                    }
+                    if (!item.src) {
+                        log(`Image Q${index}: Missing src`, 'error');
+                        errors++;
+                    }
+                    if (!item.explanation || item.explanation.length < 10) {
+                        log(`Image Q${index}: Missing or too short explanation`, 'error');
+                        errors++;
+                    }
+                });
+            }
+
+            // 2. Verify Text Quiz Data
+            if (!window.TEXT_QUIZ_DATA || !Array.isArray(window.TEXT_QUIZ_DATA)) {
+                log('CRITICAL: TEXT_QUIZ_DATA is missing or not an array', 'error');
+                errors++;
+            } else {
+                log(`found ${TEXT_QUIZ_DATA.length} text questions.`);
+                TEXT_QUIZ_DATA.forEach((item, index) => {
+                    if (!['real', 'ai'].includes(item.type)) {
+                        log(`Text Q${index}: Invalid type '${item.type}'`, 'error');
+                        errors++;
+                    }
+                    if (!item.content || item.content.length < 20) {
+                        log(`Text Q${index}: Missing or too short content`, 'error');
+                        errors++;
+                    }
+                    if (!item.explanation || item.explanation.length < 10) {
+                        log(`Text Q${index}: Missing or too short explanation`, 'error');
+                        errors++;
+                    }
+                });
+            }
+
+            if (errors === 0) {
+                log('ALL CHECKS PASSED! Logic is valid.', 'success');
+                // Signal to the browser agent that we are done
+                const done = document.createElement('div');
+                done.id = 'verification-done';
+                document.body.appendChild(done);
+            } else {
+                log(`Found ${errors} errors.`, 'error');
+                const done = document.createElement('div');
+                done.id = 'verification-failed';
+                document.body.appendChild(done);
+            }
+        }
+
+        window.onload = verifyData;
+    </script>
+</body>
+
+</html>

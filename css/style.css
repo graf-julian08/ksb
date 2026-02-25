@@ -1,0 +1,1400 @@
+/* ============================================================
+   KSB "Echt oder KI?" – Design System 2.0 (Swiss Style)
+   Pixel-perfect match to ksb-sg.ch + Mobile Optimized
+   ============================================================ */
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Design Tokens --- */
+:root {
+  --ksb-green: #96B967;
+  --ksb-green-dark: #7da34e;
+  --ksb-magenta: #E01272;
+  --ksb-magenta-dark: #c41065;
+  --ksb-text: #363635;
+  --ksb-text-light: #6b6b6b;
+  --ksb-bg: #ffffff;
+  --ksb-bg-light: #f7f7f7;
+  --ksb-border: #e0e0e0;
+  --ksb-correct: #4caf50;
+  --ksb-wrong: #e53935;
+
+  --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --header-height: 70px;
+
+  --spacing-container: 40px;
+  --spacing-mobile: 20px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 60px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ksb-text);
+  background: var(--ksb-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-container);
+  height: var(--header-height);
+  background: var(--ksb-bg);
+  border-bottom: 1px solid var(--ksb-border);
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0 var(--spacing-mobile);
+  }
+}
+
+.site-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ksb-green);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.1rem;
+    white-space: normal;
+    line-height: 1.2;
+  }
+}
+
+.header-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 1px solid var(--ksb-border);
+  /* Subtler border */
+  background: transparent;
+  color: var(--ksb-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* Removed text-transform: lowercase */
+}
+
+.nav-btn:hover {
+  background: var(--ksb-bg-light);
+  border-color: var(--ksb-text);
+}
+
+.nav-btn.active {
+  background: var(--ksb-green);
+  border-color: var(--ksb-green);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+main {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  flex: 1;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   QUIZ START – KSB Collage Layout
+   ============================================================ */
+.quiz-start {
+  display: block;
+  flex: 1;
+}
+
+.quiz-start.hidden {
+  display: none;
+}
+
+/* --- Mobile layout (stack) --- */
+.quiz-hero {
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+}
+
+.quiz-hero-text {
+  padding: 40px var(--spacing-mobile);
+  background: var(--ksb-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quiz-hero-text h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ksb-text);
+  margin-bottom: 12px;
+}
+
+.hero-tagline {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ksb-magenta);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ksb-text-light);
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.quiz-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ksb-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 40px;
+}
+
+.quiz-hero-visual {
+  position: relative;
+  overflow: hidden;
+  background: var(--ksb-bg-light);
+  min-height: 280px;
+}
+
+.quiz-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+/* --- Desktop layout (KSB collage) --- */
+@media (min-width: 900px) {
+  .quiz-hero {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  .quiz-hero-text {
+    padding: 80px 60px 80px var(--spacing-container);
+    align-items: flex-start;
+  }
+
+  .quiz-hero-text h1 {
+    font-size: 5rem;
+    margin-bottom: 8px;
+  }
+
+  .hero-tagline {
+    font-size: 2.8rem;
+    margin-bottom: 28px;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+  }
+
+  .quiz-hero-visual {
+    height: 100%;
+    min-height: auto;
+  }
+}
+
+/* --- Type visual for text quiz (magenta block) --- */
+.type-visual {
+  background: var(--ksb-magenta);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px;
+}
+
+.type-word {
+  display: block;
+  color: #fff;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.type-small {
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  margin: 8px 0;
+}
+
+/* --- Start button (flat KSB style) --- */
+.btn-start-quiz {
+  font-family: var(--font-main);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 18px 44px;
+  background: var(--ksb-green);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  align-self: flex-start;
+}
+
+.btn-start-quiz:hover {
+  background: var(--ksb-green-dark);
+}
+
+@media (max-width: 768px) {
+  .btn-start-quiz {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+  }
+}
+
+
+/* ============================================================
+   QUIZ GAME – Playing State
+   ============================================================ */
+.quiz-game {
+  display: none;
+  width: 100%;
+  max-width: 1000px;
+  /* Constrain width for better reading line length */
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.quiz-game.active {
+  display: block;
+}
+
+/* Top bar with progress + score */
+.quiz-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  /* Align to baseline */
+  padding: 30px var(--spacing-container) 10px;
+  border-bottom: 1px solid transparent;
+}
+
+@media (max-width: 768px) {
+  .quiz-topbar {
+    padding: 20px var(--spacing-mobile) 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.quiz-progress-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ksb-text);
+}
+
+.quiz-score-bar {
+  display: flex;
+  gap: 32px;
+}
+
+.quiz-score-item {
+  display: flex;
+  flex-direction: column;
+  /* Stack label and value */
+  align-items: flex-start;
+}
+
+.quiz-score-item .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ksb-text-light);
+  margin-bottom: 4px;
+}
+
+.quiz-score-item .value {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ksb-text);
+  line-height: 1;
+}
+
+.quiz-score-item.streak-active .value {
+  color: var(--ksb-magenta);
+}
+
+/* Progress bar */
+.progress-bar-track {
+  width: 100%;
+  height: 4px;
+  background: var(--ksb-bg-light);
+  margin-bottom: 20px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--ksb-green);
+  transition: width 0.4s ease;
+}
+
+/* Image display */
+.quiz-image-container {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  /* Fixed aspect ratio for consistency */
+  background: var(--ksb-bg-light);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .quiz-image-container {
+    aspect-ratio: 4 / 3;
+    /* Taller on mobile */
+    margin-bottom: 0;
+  }
+}
+
+.quiz-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Don't crop clues! */
+  cursor: zoom-in;
+  /* background-color: #f0f0f0; */
+}
+
+.image-loader {
+  font-size: 1rem;
+  color: var(--ksb-text-light);
+  position: absolute;
+}
+
+.image-loader.hidden {
+  display: none;
+}
+
+/* Text display */
+.quiz-text-container {
+  margin: 30px var(--spacing-container);
+  padding: 40px;
+  background: var(--ksb-bg-light);
+  border-left: 4px solid var(--ksb-green);
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .quiz-text-container {
+    margin: 20px var(--spacing-mobile);
+    padding: 24px;
+    min-height: auto;
+  }
+}
+
+.quiz-text-content {
+  font-size: 1.25rem;
+  /* Larger for reading */
+  line-height: 1.6;
+  color: var(--ksb-text);
+  white-space: pre-wrap;
+  font-family: 'Georgia', serif;
+  /* Serif for "text" content to differentiate from UI? Or stick to Helvetica? KSB uses serif for quotes sometimes. Let's stick to sans for modern feel but maybe italicize */
+  font-family: var(--font-main);
+  /* Stick to Swiss style sans */
+}
+
+@media (max-width: 768px) {
+  .quiz-text-content {
+    font-size: 1.1rem;
+  }
+}
+
+.quiz-text-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--ksb-text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Answer buttons */
+.quiz-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px var(--spacing-container);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+  .quiz-actions {
+    grid-template-columns: 1fr;
+    padding: 10px var(--spacing-mobile);
+    /* Reduced container padding */
+    gap: 12px;
+    /* Tighter gap */
+  }
+
+  .btn-answer {
+    padding: 16px;
+    /* Reduced internal padding from 24px */
+    font-size: 1rem;
+    /* Slightly smaller text */
+    min-height: 60px;
+    /* Ensure good touch target but not huge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.btn-answer {
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 24px;
+  border: 2px solid;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  /* Removed lowercase */
+}
+
+.btn-answer:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #ddd;
+  color: #999;
+}
+
+.btn-answer-real {
+  border-color: var(--ksb-green);
+  color: var(--ksb-green-dark);
+}
+
+.btn-answer-real:hover:not(:disabled) {
+  background: var(--ksb-green);
+  color: #fff;
+  transform: none;
+  /* NO MOVEMENT */
+  box-shadow: none;
+  /* NO SHADOW */
+}
+
+.btn-answer-ai {
+  border-color: var(--ksb-magenta);
+  color: var(--ksb-magenta);
+}
+
+.btn-answer-ai:hover:not(:disabled) {
+  background: var(--ksb-magenta);
+  color: #fff;
+  transform: none;
+  /* NO MOVEMENT */
+  box-shadow: none;
+  /* NO SHADOW */
+}
+
+/* Feedback panel */
+.quiz-feedback {
+  display: none;
+  margin: 20px var(--spacing-container);
+  padding: 32px;
+  background: var(--ksb-bg);
+  /* White background for contrast against light gray page if used, or border */
+  border: 1px solid var(--ksb-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  /* Modern soft shadow */
+}
+
+@media (max-width: 768px) {
+  .quiz-feedback {
+    margin: 20px var(--spacing-mobile);
+    padding: 20px;
+  }
+}
+
+.quiz-feedback.active {
+  display: block;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.feedback-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 50%;
+  /* Rounded for icon container is okay, or keep square? Let's go square for strict Swiss? No, circle works well for status */
+  border-radius: 0;
+  /* Strict Swiss: Square */
+}
+
+.feedback-icon.correct {
+  background: var(--ksb-correct);
+}
+
+.feedback-icon.wrong {
+  background: var(--ksb-wrong);
+}
+
+.feedback-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.feedback-title.correct {
+  color: var(--ksb-correct);
+}
+
+.feedback-title.wrong {
+  color: var(--ksb-wrong);
+}
+
+.feedback-explanation {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ksb-text);
+  margin-bottom: 24px;
+}
+
+.btn-next {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 16px 40px;
+  background: var(--ksb-text);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* Removed lowercase */
+}
+
+.btn-next:hover {
+  background: #000;
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+.quiz-results {
+  display: none;
+  padding: 60px var(--spacing-container);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .quiz-results {
+    padding: 40px var(--spacing-mobile);
+  }
+}
+
+.quiz-results.active {
+  display: block;
+}
+
+.results-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.results-level-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.results-percentage {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+
+.results-description {
+  font-size: 1.3rem;
+  color: var(--ksb-text);
+  max-width: 600px;
+  margin: 0 auto 16px;
+  line-height: 1.4;
+}
+
+.results-advice {
+  font-size: 1.1rem;
+  color: var(--ksb-text-light);
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Stats grid */
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 600px) {
+  .results-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-item {
+  text-align: center;
+  padding: 24px;
+  background: var(--ksb-bg-light);
+  border: 1px solid transparent;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--ksb-text);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--ksb-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* Details */
+.results-details {
+  margin-bottom: 60px;
+}
+
+.results-details h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.result-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--ksb-border);
+  align-items: flex-start;
+}
+
+@media (max-width: 600px) {
+  .result-item {
+    flex-direction: column;
+  }
+
+  .result-thumb {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+.result-thumb {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--ksb-bg-light);
+}
+
+.result-info {
+  flex: 1;
+}
+
+.result-status {
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.result-status.correct {
+  color: var(--ksb-correct);
+}
+
+.result-status.wrong {
+  color: var(--ksb-wrong);
+}
+
+.result-explanation-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ksb-text-light);
+}
+
+/* Result actions */
+.results-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-restart {
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 18px 48px;
+  background: var(--ksb-green);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  /* Removed lowercase */
+}
+
+.btn-restart:hover {
+  background: var(--ksb-green-dark);
+  transform: translateY(-2px);
+}
+
+.btn-tips {
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 18px 48px;
+  background: transparent;
+  color: var(--ksb-text);
+  border: 2px solid var(--ksb-text);
+  cursor: pointer;
+  transition: all 0.2s;
+  /* Removed lowercase */
+}
+
+.btn-tips:hover {
+  background: var(--ksb-text);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   TIPS SECTION
+   ============================================================ */
+.tips-section {
+  padding: 60px var(--spacing-container);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .tips-section {
+    padding: 40px var(--spacing-mobile);
+  }
+}
+
+.tips-header {
+  margin-bottom: 60px;
+}
+
+.tips-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--ksb-text);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.tips-header h1 em {
+  color: var(--ksb-green);
+  font-style: italic;
+}
+
+.tips-header>p {
+  font-size: 1.25rem;
+  color: var(--ksb-text-light);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* Tips sub-tabs */
+.tips-tabs {
+  display: flex;
+  gap: 8px;
+  /* Slight gap */
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--ksb-border);
+  overflow-x: auto;
+  /* Scroll on mobile */
+  padding-bottom: 10px;
+}
+
+.tips-tab-btn {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--ksb-text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -11px;
+  /* Align deeply */
+  white-space: nowrap;
+  /* Removed lowercase */
+}
+
+.tips-tab-btn:hover {
+  color: var(--ksb-text);
+}
+
+.tips-tab-btn.active {
+  color: var(--ksb-text);
+  font-weight: 700;
+  border-bottom-color: var(--ksb-green);
+}
+
+.tips-content {
+  display: none;
+}
+
+.tips-content.active {
+  display: block;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.tip-card {
+  padding: 32px;
+  background: var(--ksb-bg);
+  border: 1px solid var(--ksb-border);
+  transition: transform 0.2s;
+}
+
+.tip-card:hover {
+  border-color: var(--ksb-green);
+  transform: translateY(-4px);
+}
+
+.tip-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--ksb-text);
+}
+
+.tip-card-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ksb-text-light);
+  margin-bottom: 24px;
+}
+
+.tip-card-difficulty {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ksb-green);
+  border: 1px solid var(--ksb-green);
+  padding: 4px 8px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 60px var(--spacing-container);
+  border-top: 1px solid var(--ksb-border);
+  background: var(--ksb-bg);
+  margin-top: auto;
+  /* Push to bottom */
+}
+
+@media (max-width: 600px) {
+  .site-footer {
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px var(--spacing-mobile);
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  line-height: 1.3;
+}
+
+.footer-brand-line1,
+.footer-brand-line2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ksb-text);
+}
+
+.footer-brand-line3 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ksb-green);
+  margin-top: 2px;
+}
+
+.footer-contact {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ksb-text-light);
+}
+
+.footer-impressum {
+  margin-top: 12px;
+}
+
+.footer-impressum a {
+  font-size: 0.85rem;
+  color: var(--ksb-text-light);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.footer-impressum a:hover {
+  color: var(--ksb-green);
+}
+
+/* ============================================================
+   IMPRESSUM PAGE
+   ============================================================ */
+
+.imp-page {
+  flex: 1;
+}
+
+/* Intro */
+.imp-intro {
+  padding: 60px 8% 48px;
+  border-bottom: 1px solid var(--ksb-border);
+}
+
+.imp-intro-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.imp-intro-logo {
+  max-width: 140px;
+  height: auto;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.imp-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ksb-text);
+  margin-bottom: 16px;
+}
+
+.imp-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ksb-text-light);
+  max-width: 640px;
+}
+
+.imp-subtitle em {
+  color: var(--ksb-green);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* Credits */
+.imp-credits {
+  padding: 0 8%;
+}
+
+.imp-credits-row {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
+  padding: 44px 0;
+  border-bottom: 1px solid var(--ksb-border);
+}
+
+.imp-credits-row:last-child {
+  border-bottom: none;
+  padding-bottom: 64px;
+}
+
+.imp-credits-number {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--ksb-bg-light);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  min-width: 100px;
+  -webkit-text-stroke: 1px var(--ksb-border);
+}
+
+.imp-credits-body {
+  flex: 1;
+}
+
+.imp-credits-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ksb-green);
+  margin-bottom: 6px;
+}
+
+.imp-credits-role {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ksb-text-light);
+  margin-bottom: 10px;
+}
+
+.imp-credits-names {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.imp-name {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--ksb-text);
+  letter-spacing: -0.01em;
+}
+
+.imp-dot {
+  font-size: 1.5rem;
+  color: var(--ksb-text-light);
+  font-weight: 300;
+}
+
+.imp-credits-address {
+  font-size: 1.05rem;
+  color: var(--ksb-text-light);
+  line-height: 1.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .imp-intro {
+    padding: 40px 24px 36px;
+  }
+
+  .imp-intro-top {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .imp-intro-logo {
+    display: none;
+  }
+
+  .imp-credits {
+    padding: 0 24px;
+  }
+
+  .imp-credits-row {
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 0;
+  }
+
+  .imp-credits-number {
+    min-width: auto;
+  }
+
+  .imp-credits-names {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  /* White overlay instead of black for cleaner look? No, keeping dark for contrast but cleaner */
+  background: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0 20px;
+  }
+
+  .quiz-hero {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .quiz-hero-visual {
+    max-height: 50vh;
+    min-height: 300px;
+    position: relative;
+  }
+
+  .quiz-hero-visual img {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .quiz-hero-text {
+    padding: 48px 24px;
+  }
+
+  .quiz-features {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quiz-topbar {
+    padding: 16px 20px 8px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .quiz-actions {
+    padding: 24px 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .btn-answer {
+    min-width: 100%;
+    /* Full width buttons on mobile */
+  }
+
+  .quiz-feedback {
+    margin: 0 20px 24px;
+    padding: 24px;
+  }
+
+  .quiz-text-container {
+    margin: 0 20px;
+    padding: 32px 24px;
+  }
+
+  .quiz-results {
+    padding: 40px 20px;
+  }
+
+  .results-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tips-section {
+    padding: 40px 20px;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    padding: 32px 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+
+  .results-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-title {
+    font-size: 1.1rem;
+  }
+
+  .nav-btn {
+    font-size: 0.75rem;
+    padding: 6px 14px;
+  }
+
+  .quiz-hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .tips-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-title {
+    font-size: 0.9rem;
+  }
+
+  .nav-btn {
+    font-size: 0.75rem;
+    padding: 6px 14px;
+  }
+
+  .quiz-hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .tips-header h1 {
+    font-size: 2rem;
+  }
+}

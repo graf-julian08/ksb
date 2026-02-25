@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Asset Verification</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Asset Verification</h1>
+    <div id="status">Running checks...</div>
+    <div id="results"></div>
+
+    <script src="js/data.js"></script>
+    <script>
+        const resultsDiv = document.getElementById('results');
+        const statusDiv = document.getElementById('status');
+        let completed = 0;
+        let errors = 0;
+        const total = IMAGE_QUIZ_DATA.length;
+        const badAssets = [];
+
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `item ${type}`;
+            div.textContent = msg;
+            resultsDiv.appendChild(div);
+        }
+
+        async function verifyImage(item, index) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    log(`[OK] Item ${index}: ${item.src} (${img.width}x${img.height})`, 'success');
+                    resolve(true);
+                };
+                img.onerror = () => {
+                    log(`[FAIL] Item ${index}: ${item.src}`, 'error');
+                    badAssets.push({ index, src: item.src });
+                    errors++;
+                    resolve(false);
+                };
+                // Add a random param to prevent caching if needed, but for now raw SRC is better
+                img.src = item.src;
+            });
+        }
+
+        async function runChecks() {
+            log(`Checking ${total} images...`);
+
+            for (let i = 0; i < total; i++) {
+                await verifyImage(IMAGE_QUIZ_DATA[i], i);
+                completed++;
+            }
+
+            statusDiv.textContent = `Completed. Found ${errors} errors.`;
+
+            const summary = document.createElement('div');
+            summary.id = 'final-summary';
+            summary.dataset.errors = errors;
+            summary.dataset.badSrcs = JSON.stringify(badAssets);
+            summary.textContent = errors === 0 ? 'ALL_OK' : 'HAS_ERRORS';
+            document.body.appendChild(summary);
+        }
+
+        window.onload = runChecks;
+    </script>
+</body>
+
+</html>
